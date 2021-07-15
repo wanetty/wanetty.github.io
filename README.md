@@ -7,6 +7,6 @@ I'm writing the first page now, if you have any question or you're just curious,
 </div>
 
 
-[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](www.linkedin.com/in/eduard-gonzalez)
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/eduard-gonzalez)
 &nbsp;
 [![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/wanetty)
