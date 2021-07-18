@@ -10,14 +10,14 @@
 Antes de entrar en detalle sobre como abordé el examen y el laboratorio creo que es mejor entrar en el contexto de saber en que situación estaba yo cuando decidí adentrarme en esta certificación.</p>
 <p style="text-align: justify;">
 Siempre he sido una persona curiosa (Creo que cualquiera que se dedique a esto debe serlo), por lo tanto, mi background hasta entonces era de:</p>
-<p style="text-align: justify;">
+
 
 * Algo de conocimientos de Linux adquiridos por mi carrera/cuenta propia.
 * Conocimiento del funcionamiento interno de webs, ya que me había dedicado como programador a ello.
 * Unas cuantas líneas a mis espaldas de diferentes lenguajes, las cuales me había dedicado a revisar que no contengan vulnerabilidades.
 * Unas pocas máquinas en Hack The Box (15 o así)
 * Y la curiosidad de haber estado trasteando con un poco de todo... :D
-</p>
+
 <p style="text-align: justify;">
 Era consciente de que mi background quizá no era el mejor, de ello estoy seguro ahora. Pero necesitaba un reto así en mi vida, había demostrado mi habilidad a la hora de revisar código de otras personas y encontrar sus vulnerabilidades y en ese momento iba a empezar en un trabajo nuevo como pentester. Que mejor momento que empezar en un nuevo trabajo como pentester y para asumir el reto de tal certificación como era el OSCP (Nótese la ironía).
 </p>
@@ -54,7 +54,9 @@ Finalmente, después de 3 meses post-laboratorio, habría realizado unas 20-30 m
 <p style="text-align: justify;">
 Una vez había terminado el laboratorio, sabía que si no programaba una fecha en ese momento no le iba a poner esas ganas que le pone todo el mundo cuando sabe que el tiempo se le acaba, así que cogí el último viernes que me dejaba escoger y lo agendé a las 10 de la mañana, una hora que me permitía despertarme a una hora la cual haya podido descansar bien, y en el caso de tener que dormir durante el examen, me permitía tener horas de margen cuando me despertase.</p>
 <p style="text-align: justify;">
-Durante estos tres meses antes del examen, fue todo como una curva exponencial, empecé flojito, pero cada día que pasaba estudiaba más y más realizando máquinas de laboratorio, siguiendo la filosofía que te intentan enseñar en el OSCP, ese "try harder" que todo el mundo presumen cuando se lo saca. Finalmente me había realizado casi todas las máquinas de una lista que recomiendan por [aqui](https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=1839402159).</p>
+Durante estos tres meses antes del examen, fue todo como una curva exponencial, empecé flojito, pero cada día que pasaba estudiaba más y más realizando máquinas de laboratorio, siguiendo la filosofía que te intentan enseñar en el OSCP, ese "try harder" que todo el mundo presumen cuando se lo saca. Finalmente me había realizado casi todas las máquinas de una lista que recomiendan por [aqui](https://docs.google.com/spreadsheets/d/dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=1839402159).
+
+</p>
 <p style="text-align: justify;">
 Insisto que no quiero ser el modelo de nadie, y estoy seguro de que hay mejores formas de plantearse el examen sin tener que hacer esa burrada de máquinas.... A mí me funcionó...
 </p>
