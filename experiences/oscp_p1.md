@@ -54,7 +54,11 @@ Finalmente, después de 3 meses post-laboratorio, habría realizado unas 20-30 m
 <p style="text-align: justify;">
 Una vez había terminado el laboratorio, sabía que si no programaba una fecha en ese momento no le iba a poner esas ganas que le pone todo el mundo cuando sabe que el tiempo se le acaba, así que cogí el último viernes que me dejaba escoger y lo agendé a las 10 de la mañana, una hora que me permitía despertarme a una hora la cual haya podido descansar bien, y en el caso de tener que dormir durante el examen, me permitía tener horas de margen cuando me despertase.</p>
 <p style="text-align: justify;">
-Durante estos tres meses antes del examen, fue todo como una curva exponencial, empecé flojito, pero cada día que pasaba estudiaba más y más realizando máquinas de laboratorio, siguiendo la filosofía que te intentan enseñar en el OSCP, ese "try harder" que todo el mundo presumen cuando se lo saca. Finalmente me había realizado casi todas las máquinas de una lista que recomiendan por </p>[aquí](https://docs.google.com/spreadsheets/d/dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=1839402159).
+
+Durante estos tres meses antes del examen, fue todo como una curva exponencial, empecé flojito, pero cada día que pasaba estudiaba más y más realizando máquinas de laboratorio, siguiendo la filosofía que te intentan enseñar en el OSCP, ese "try harder" que todo el mundo presumen cuando se lo saca. Finalmente me había realizado casi todas las máquinas de una lista que recomiendan por [aquí](https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=1839402159).
+
+
+</p>
 
 <p style="text-align: justify;">
 Insisto que no quiero ser el modelo de nadie, y estoy seguro de que hay mejores formas de plantearse el examen sin tener que hacer esa burrada de máquinas.... A mí me funcionó...
