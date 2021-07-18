@@ -11,11 +11,13 @@ Antes de entrar en detalle sobre como abordé el examen y el laboratorio creo qu
 <p style="text-align: justify;">
 Siempre he sido una persona curiosa (Creo que cualquiera que se dedique a esto debe serlo), por lo tanto, mi background hasta entonces era de:</p>
 <p style="text-align: justify;">
+
 * Algo de conocimientos de Linux adquiridos por mi carrera/cuenta propia.
 * Conocimiento del funcionamiento interno de webs, ya que me había dedicado como programador a ello.
 * Unas cuantas líneas a mis espaldas de diferentes lenguajes, las cuales me había dedicado a revisar que no contengan vulnerabilidades.
 * Unas pocas máquinas en Hack The Box (15 o así)
-* Y la curiosidad de haber estado trasteando con un poco de todo... :D</p>
+* Y la curiosidad de haber estado trasteando con un poco de todo... :D
+</p>
 <p style="text-align: justify;">
 Era consciente de que mi background quizá no era el mejor, de ello estoy seguro ahora. Pero necesitaba un reto así en mi vida, había demostrado mi habilidad a la hora de revisar código de otras personas y encontrar sus vulnerabilidades y en ese momento iba a empezar en un trabajo nuevo como pentester. Que mejor momento que empezar en un nuevo trabajo como pentester y para asumir el reto de tal certificación como era el OSCP (Nótese la ironía).
 </p>
@@ -28,7 +30,6 @@ Una vez tomé la decisión de tomar el examen, leí muchos blogs los cuales come
 Una vez me informé lo suficiente, tomé la decisión de primero apuntarme al OSCP, hacer el laboratorio y durante los 3 meses que tienes posteriormente para programar tu examen, hacer todas las máquinas posibles (Spoiler: Me equivoqué). Esta decisión se justificaba con la afirmación de, "Si no estudio antes el manual, no podré practicar". Una vez ejecutado mi plan, todo fue muy rápido, me apunté 3 meses, me llegó el manual y probé la VPN, me lo leí mientras hacia ejercicios, vi que el tiempo se me iba y no había empezado el laboratorio, seguía haciendo ejercicios, seguía viendo que el tiempo seguía pasando.... Finalmente, cuando pasaron 3 semanas me planteé que 5 puntos del examen no compensaban con la cantidad de tiempo que estaba invirtiendo, haciendo ejercicios y lo poco que estaba practicando en el laboratorio, pues el tiempo corría en mi contra.</p>
 <p style="text-align: justify;">
 De forma resumida y quizá se haga algo breve la explicación, estoy seguro de que muchos lo agradeceréis, realicé finalmente 35 máquinas del laboratorio (Creo recordar) ...</p>
-</p>
 
 ### Fase post laboratorio
 
@@ -36,8 +37,12 @@ De forma resumida y quizá se haga algo breve la explicación, estoy seguro de q
 Es mi primer post, estoy seguro de que me estoy enrollando demasiado y la mitad os habéis perdido, resumiendo:</p>
 <p style="text-align: justify;">
 1.- Tomé la decisión de primero laboratorio y después práctico en HTB y THM</p>
-2.- Veo que no me compensa hacer los ejercicios del manual
-3.- Hago en 3 meses que me apunté 35 máquinas...
+<p style="text-align: justify;">
+2.- Veo que no me compensa hacer los ejercicios del manual</p>
+<p style="text-align: justify;">
+3.- Hago en 3 meses que me apunté 35 máquinas...</p>
+
+
 <p style="text-align: justify;">
 En este punto me di cuenta de que me había equivocado totalmente, no tenía la suficiente experiencia, me había metido en un laboratorio con la esperanza de que el manual me enseñase todas las técnicas posibles y realmente hasta ese momento no había comprendido la filosofía que te estaban intentado enseñar. Durante los 3 meses posteriores que tienes para programar el examen, justamente cayeron en época de verano y en medio del confinamiento del COVID, es cierto que con los conocimientos que había adquirido empecé a practicar en las plataformas de HTB y THM, no de forma tan dedicada, pero al empezar con las máquinas fáciles si que realizaba unas 2 máquinas por semana. Mi motivación era como una montaña rusa... o me obsesionaba y me acostaba de madrugada o el simple hecho de intentar realizar una máquina me horrorizaba.</p>
 <p style="text-align: justify;">
