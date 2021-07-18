@@ -64,7 +64,7 @@ Insisto que no quiero ser el modelo de nadie, y estoy seguro de que hay mejores 
 
  Finalmente, pasé el domingo sin ganas de ver una pantalla, había terminado agotado y estaba feliz, uno sabe como le ha ido el examen, eso es así. El lunes a media mañana recibí el correo como que había aprobado. 
 
- ### Conclusiones
+### Conclusiones
 
  Para concluir con este "rollazo" que he pegado, decir que estoy contento de haber podido vivir esta experiencia y que haya tenido un final feliz para mí. Ahora que ha pasado un tiempo y lo veo con perspectiva, sé que está certificación en mi caso, es el principio del camino, me queda muchísimo por aprender, tengo la base, pero la mejor forma de aprender es probando por ti mismo y estoy seguro de que eso no se enseña en ningún sitio mas que uno mismo enfrente de algo con conexión.
 
