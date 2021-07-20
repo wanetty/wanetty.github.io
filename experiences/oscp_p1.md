@@ -1,6 +1,6 @@
 ## Mi experiencia con el OSCP
 
-**Atención:** Este post habla de experiencias, no entra a nada técnico.
+**Atención:** Este post habla sobre experiencias mías, no habla sobre nada técnico.
 
 <p style="text-align: justify;">Primero de todo quiero aclarar que escribo ese post sin intención de ser modelo a seguir en la forma de orientar el examen del OSCP. Soy consciente que hay 1000 post con relación a esto y estoy seguro de que este no será el mejor, ni pretende serlo, simplemente me gustaría dejar un relato para que cuando lo lea en unos años, vea mi evolución. Una vez hemos aclarado esto... podemos empezar :D </p>
 
@@ -25,7 +25,7 @@ Era consciente de que mi background quizá no era el mejor, de ello estoy seguro
 ### Primeros pasos y fin del laboratorio
 
 <p style="text-align: justify;">
-Una vez tomé la decisión de tomar el examen, leí muchos blogs los cuales comentaban formas diferentes de plantear el laboratorio y seguidamente el examen. Alguno de ellos te propone primero practicar por tu cuenta en plataformas como Hack The Box o Try Hack Me (Mejor esta para empezar), otros blogs te proponían empezar el manual + laboratorio y posteriormente practicar por tu cuenta con los conocimientos adquiridos, incluso llegué a leer alguna locura de que había gente que dormía 20 minutos cada 3 horas durante tres meses por tal de estar despierto y seguir estudiando... :S</p>
+Una vez tomé la decisión de tomar el examen, leí muchos blogs los cuales comentaban formas diferentes de plantear el laboratorio y seguidamente el examen. Alguno de ellos te propone primero practicar por tu cuenta en plataformas como Hack The Box o Try Hack Me (Mejor esta última para empezar), otros blogs te proponían empezar el manual + laboratorio y posteriormente practicar por tu cuenta con los conocimientos adquiridos, incluso llegué a leer alguna locura de que había gente que dormía 20 minutos cada 3 horas durante tres meses por tal de estar despierto y seguir estudiando... :S</p>
 <p style="text-align: justify;">
 Una vez me informé lo suficiente, tomé la decisión de primero apuntarme al OSCP, hacer el laboratorio y durante los 3 meses que tienes posteriormente para programar tu examen, hacer todas las máquinas posibles (Spoiler: Me equivoqué). Esta decisión se justificaba con la afirmación de, "Si no estudio antes el manual, no podré practicar". Una vez ejecutado mi plan, todo fue muy rápido, me apunté 3 meses, me llegó el manual y probé la VPN, me lo leí mientras hacia ejercicios, vi que el tiempo se me iba y no había empezado el laboratorio, seguía haciendo ejercicios, seguía viendo que el tiempo seguía pasando.... Finalmente, cuando pasaron 3 semanas me planteé que 5 puntos del examen no compensaban con la cantidad de tiempo que estaba invirtiendo, haciendo ejercicios y lo poco que estaba practicando en el laboratorio, pues el tiempo corría en mi contra.</p>
 <p style="text-align: justify;">
