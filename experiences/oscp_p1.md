@@ -89,10 +89,9 @@ Finalmente, pasé el domingo sin ganas de ver una pantalla, había terminado ago
 <p style="text-align: justify;">
 Para concluir con este "rollazo" que he pegado, decir que estoy contento de haber podido vivir esta experiencia y que haya tenido un final feliz para mí. Ahora que ha pasado un tiempo y lo veo con perspectiva, sé que está certificación en mi caso, es el principio del camino, me queda muchísimo por aprender, tengo la base, pero la mejor forma de aprender es probando por ti mismo y estoy seguro de que eso no se enseña en ningún sitio más que uno mismo enfrente de algo con conexión.
 </p>
-
-<div style="text-align:center">
+<p align="center">
    
 [![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/eduard-gonzalez) &nbsp; <img src="https://img.icons8.com/ios-glyphs/60/000000/jellyfish.png"/> &nbsp; [![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/wanetty)
 
-</div >
+</p >
 
