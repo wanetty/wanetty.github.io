@@ -119,7 +119,7 @@ Enter the configuration as shown below and click on send a test email. I recomme
 
 ![Sending Test Mail](../img/pofish5.png)
 
-
+  
 ![Mail in Inbox](../img/pofish6.png)
 
 
