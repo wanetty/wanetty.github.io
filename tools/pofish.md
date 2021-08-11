@@ -50,7 +50,7 @@ To be able to deploy the image is very simple, the only thing we have to know is
 ```docker run -it --name pofish -p 80:80 -p 3333:3333 --env DOMAIN=<yourdomain> --env PUBLIC_IP=<your_public_ip> pofish```
 
 
-## Post Deployment
+## Postdeployment
 
 <p style="text-align: justify;">
 Once we have deplored the image we can see how the postfix service starts, the openkdim that is the one who signs the message to us also and proposed that gophish also.</p>
@@ -123,7 +123,7 @@ Enter the configuration as shown below and click on send a test email. I recomme
 ![Mail in Inbox](../img/pofish6.png)
 
 
-## Interesting Links:
+## Interesting links
 
 https://book.hacktricks.xyz/phishing-methodology
 
