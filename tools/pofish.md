@@ -59,7 +59,8 @@ Once we have deplored the image we can see how the postfix service starts, the o
 In the case of gophish we will see the password that we must use the first time we log in to the administrator panel.</p>
 
 
-[Information after deployment](../img/pofish1.png)
+![Information after deployment](../img/pofish1.png)
+
 <p style="text-align: justify;">
 Once we have deployed the container, so that the dkim we have generated can be easily checked, it is necessary to add a TXT entry to our DNS record. To get what needs to be added we can type in a terminal the following command:
 </p>
@@ -69,7 +70,7 @@ Once we have deployed the container, so that the dkim we have generated can be e
 An example of how it should look is as follows:
 </p>
 
-[DKIM key extracted from the container](../img/pofish2.png)
+![DKIM key extracted from the container](../img/pofish2.png)
 
 
 ```202109._example.com | TXT | v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyg9WF/gtyztDW3YuDI/i+y6K+GabxUWQ3wgNCimk8zdmwlYST4KgdvZAbgT9dHjNcccKOUtj/UhvnYsr1PBuY4EHebXreQOM/C9J0gBfr/OAHEGmBq6zsxutXQ/Pv8Z6yKC1UTfpjJra3lhBGdTCZPiRLuznU/YeoFza8KrpU0ROWJYLm733BjdK3NO4IB4LdZy1KHacanTbhIVvKLBB43pfjtfzA6tPSm1bbYF5Dm2o8lATnNLY3+QmqTHlGyFQ5phJhg9VPSsXuW/WZFH15WUp2U3FzPCYlfrT/3xm+LxXMpBi2WOK1DOxrAEJPwaF3fSYX4AOQJ06naSNof0S+QIDAQAB```
@@ -108,18 +109,18 @@ In case you want to know more about how this tool works, I recommend going to it
 The next step will be to change the password, I do not think you will have problems with them.
 </p>
 
-[Main Panel of Gophish](../img/pofish3.png)
+![Main Panel of Gophish](../img/pofish3.png)
 <p style="text-align: justify;">
 Enter the configuration as shown below and click on send a test email. I recommend to do it to a 10 minutes email, because if we are detected testing, it is very likely to end up in a blacklist.
 </p>
 
-[Settings of Sending Profile](../img/pofish4.png)
+![Settings of Sending Profile](../img/pofish4.png)
 
 
-[Sending Test Mail](../img/pofish5.png)
+![Sending Test Mail](../img/pofish5.png)
 
 
-[Sending Test Mail](../img/pofish6.png)
+![Mail in Inbox](../img/pofish6.png)
 
 
 ## Interesting Links:
