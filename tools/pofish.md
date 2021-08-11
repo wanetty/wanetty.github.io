@@ -42,13 +42,16 @@ The construction process can be listed in 3 phases:
 3. OpenDkim installation, to be able to sign the mails.
 
 ## Deployment
+
 <p style="text-align: justify;">
 To be able to deploy the image is very simple, the only thing we have to know is the Domain we want to use and our public IP. In addition we must know that in order to access GoPhish we must expose the port 3333 and in the case of wanting to expose the server itself we must also expose the port 80.
 </p>
 
 ```docker run -it --name pofish -p 80:80 -p 3333:3333 --env DOMAIN=<yourdomain> --env PUBLIC_IP=<your_public_ip> pofish```
 
+
 ## Post Deployment
+
 <p style="text-align: justify;">
 Once we have deplored the image we can see how the postfix service starts, the openkdim that is the one who signs the message to us also and proposed that gophish also.</p>
 
@@ -77,6 +80,7 @@ Once it has propagated through the network we can check that our dkim is valid a
 https://www.dmarcanalyzer.com/es/dkim-3/dkim-record-check/
 
 ### Other TXT records to consider
+
 <p style="text-align: justify;">
 In short, I recommend adding the SPF to the DNS records as well. Here is a small wizard on how to configure it.
 </p>
@@ -96,6 +100,7 @@ _Example:_
 
 
 ## GoPhish
+
 <p style="text-align: justify;">
 In case you want to know more about how this tool works, I recommend going to its official documentation. In order to test that emails are sent correctly, it is best to go to the browser and access the ip https://127.0.0.1:3333, which is where our administrator panel will be and enter username and password that we have seen previously.</p>
 
@@ -117,7 +122,7 @@ Enter the configuration as shown below and click on send a test email. I recomme
 [Sending Test Mail](../img/pofish6.png)
 
 
-## Interesting links:
+## Interesting Links:
 
 https://book.hacktricks.xyz/phishing-methodology
 
