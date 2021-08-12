@@ -15,9 +15,9 @@ Lately I have been making several phishing attempts. For one thing or another I 
 <p style="text-align: justify;">
 Normally when we are going to make a phishing attack, what we are interested in to obtain a good result is that the mails arrive in the inbox. For this we have to have a domain which has the maximum possible "reputation" (there are many sites that talk about how to choose the best domain). 
 
-Once we have the domain and a DNS record, we need a VPS with a public IP to associate this domain with.
+Once we have the domain and a DNS record, we need a VPS with a public IP to associate this domain with.</p>
 
-_With the execution of this DockerFile it is possible to send mails without having to comply with the above, but it is very likely that the mails will go directly to SPAM._</p>
+_With the execution of this DockerFile it is possible to send mails without having to comply with the above, but it is very likely that the mails will go directly to SPAM._
 
 
 ## Building the docker
