@@ -26,7 +26,7 @@ _With the execution of this DockerFile it is possible to send mails without havi
 The first thing to do before building the docker is to clone the docker repository. To do this we simply need to do the following: 
 </p>
 
-```git clone <code> ```
+```git clone https://github.com/wanetty/PoFish.git ```
 <p style="text-align: justify;">
 Once we have cloned it we simply have to access inside the directory and execute the following command:
 </p>
