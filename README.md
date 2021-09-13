@@ -1,6 +1,6 @@
 ## Welcome to my site.
 
-Hey! I have written my first post talking about the OSCP experience, check it out by following this link:
+Hey! I'm doing research on several things, as soon as I get something interesting I'll post it :^)
 
 ### [**Mi experiencia con el OSCP [ESP]**](https://wanetty.github.io/experiences/oscp_p1)
 Post in which I talk about my experience in the adventure of becoming OSCP certified.
