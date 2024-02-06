@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Link from '../components/Link.astro';
+
+---
+
+<Layout title="Wanetty Blogs">
+	<Header />
+	<h2>Hola mundo desde Astro</h2>
+	<div class="grid grid-cols-12 gap-4">
+		<div class="col-span-12 md:col-span-6 lg:col-span-4">
+			<Link date="1/1/1999" description='Prueba de descripción' snippetone='Javasript' link='/blog/test'/>
+		</div>
+		<div class="col-span-12 md:col-span-6 lg:col-span-4">
+			<Link date="1/1/1999" description='Prueba de descripción' snippetone='Javasript' link='/blog/test'/>
+		</div>
+		<div class="col-span-12 md:col-span-6 lg:col-span-4">
+			<Link date="1/1/1999" description='Prueba de descripción' snippetone='Javasript' link='/blog/test'/>
+		</div>
+		<div class="col-span-12 md:col-span-6 lg:col-span-4">
+			<Link date="1/1/1999" description='Prueba de descripción' snippetone='Javasript' link='/blog/test'/>
+		</div>
+	</div>
+</Layout>
