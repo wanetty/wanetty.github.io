@@ -1,25 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Link from '../components/Link.astro';
+import Layout from "@/layouts/Layout.astro";
+import Link from "@/components/Link.astro";
 
 ---
 
-<Layout title="Wanetty Blogs">
-	<Header />
-	<h2>Hola mundo desde Astro</h2>
-	<div class="grid grid-cols-12 gap-4">
+<Layout title="Wanetty Blogs" >
+	<br>
+	<div class="grid grid-cols-12 gap-4 mx-5" >
 		<div class="col-span-12 md:col-span-6 lg:col-span-4">
-			<Link date="1/1/1999" description='Prueba de descripción' snippetone='Javasript' link='/blog/test'/>
+			<Link title="Password Security Policies (PSO) in Active Directory (AD)" description='Password Security Policies (PSO) in Active Directory (AD) are a critical component in a corporate networks security infrastructure...' snippetone='Technologies' link='/blog/technologies/pso'/>
 		</div>
 		<div class="col-span-12 md:col-span-6 lg:col-span-4">
-			<Link date="1/1/1999" description='Prueba de descripción' snippetone='Javasript' link='/blog/test'/>
+			<Link title="How to solve monkey_vuln_machine"  description='Learn how to solve a CTF machine in this post. Discover how to perform a login bypass, decrypt hashes, escalate privileges, and more.' snippetone='Experiences' link='/blog/experiences/resolution_monkey'/>
 		</div>
 		<div class="col-span-12 md:col-span-6 lg:col-span-4">
-			<Link date="1/1/1999" description='Prueba de descripción' snippetone='Javasript' link='/blog/test'/>
+			<Link title="POC log4j exploit."  description='Post in which we exploit the log4j vuln (CVE-2021-44228)' snippetone='POC' link='/blog/poc/log4j_exploit'/>
 		</div>
 		<div class="col-span-12 md:col-span-6 lg:col-span-4">
-			<Link date="1/1/1999" description='Prueba de descripción' snippetone='Javasript' link='/blog/test'/>
+			<Link title="A new docker for phishing (PoFish)"  description='Lately I have been making several phishing attempts. For one thing or another I have had to perform the same configuration of the same applications in different environments. For this reason I have created a DockerFile which once built, can be deployed with different options to perform a phishing exercise.' snippetone='Tools' link='/blog/tools/pofish'/>
 		</div>
+		<div class="col-span-12 md:col-span-6 lg:col-span-4">
+			<Link title="Mi experiencia con el OSCP"  description='Post in which I talk about my experience in the adventure of becoming OSCP certified.' snippetone='Expereiences' link='/blog/experiences/oscp_p1'/>
+		</div>
+		
 	</div>
 </Layout>
