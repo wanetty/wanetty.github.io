@@ -1,0 +1,49 @@
+---
+  declare global {
+      interface Window {
+        goToTop: () => void;
+      }
+    }
+
+---
+
+  <button id="to-top-button"  onclick="goToTop()" id="topButton" class="fixed bottom-10 right-10 z-10 animate-bounce rounded-full bg-orange-500 w-16 h-16 hidden justify-center items-center shadow-md">
+          <div class="object-center mx-2.5">
+            <svg  class="icon icon-tabler icon-tabler-arrow-up" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 5l0 14" />
+              <path d="M18 11l-6 -6" />
+                <path d="M6 11l6 -6" />
+            </svg>
+          </div>
+      </button>
+  <script>
+  // Get the 'to top' button element by ID
+  var toTopButton = document.getElementById("to-top-button");
+
+// Check if the button exists
+if (toTopButton) {
+
+    // On scroll event, toggle button visibility based on scroll position
+    window.onscroll = function() {
+        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+            if (toTopButton) {
+              toTopButton.classList.remove("hidden");
+            }
+        } else {
+            if (toTopButton) {
+              toTopButton.classList.add("hidden");
+            }
+        }
+    };
+
+    // Function to scroll to the top of the page smoothly
+  
+    window.goToTop = function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+  }
+  </script>

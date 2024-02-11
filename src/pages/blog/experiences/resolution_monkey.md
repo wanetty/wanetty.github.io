@@ -1,6 +1,6 @@
 ---
 layout: /src/layouts/MDLayout.astro
-title: Cómo resolver monkey_vuln_machine
+title: Cómo resolver monkey vuln machine
 description: Learn how to solve a CTF machine in this post. Discover how to perform a login bypass, decrypt hashes, escalate privileges, and more.
 ---
 **Es importante tener en cuenta que el siguiente post contiene spoilers y revela la solución a una máquina de CTF. Si aún no has resuelto la máquina y quieres hacerlo por ti mismo, te recomendamos que no sigas leyendo. ¡Buena suerte resolviendo la máquina!**

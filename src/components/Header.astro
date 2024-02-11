@@ -1,6 +1,8 @@
 ---
 const {visible} = Astro.props;
 const { title } = Astro.props;
+
+import { ViewTransitions } from 'astro:transitions';
 ---
 <head>
     <meta charset="UTF-8" />
@@ -8,20 +10,21 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <ViewTransitions />
 </head>
-<header class="dark:bg-slate-600 bg-slate-300 sticky top-0">
+<header class="dark:bg-slate-600 bg-slate-300 top-0" transition:animate="none">
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div class="sm:flex sm:items-center sm:justify-between">
             <div class="flex items-center">
-                <img src="/static/avatar.jpg" alt="Wanetty Avatar" class="h-12 w-12 rounded-full mr-2">
+                <img src="/static/avatar.jpg" alt="Wanetty Avatar" class="adjust-on-scroll  h-12 w-12 rounded-full mr-2">
                 <div class="text-center sm:text-left">
-                    <h1 class="dark:text-white text-2xl font-bold text-gray-900 sm:text-3xl">Welcome to Wanetty Blog</h1>
-                    <p class="mt-1.5 text-sm dark:text-gray-200 text-gray-500">Things about my experience in cybersecurity.</p>
+                    <h1 class="dark:text-white text-2xl font-bold adjust-on-scroll  text-gray-900 sm:text-3xl">Welcome to Wanetty Blog</h1>
+                    <p class="hide-on-scroll mt-1.5 text-sm dark:text-gray-200 text-gray-500">Things about my experience in cybersecurity.</p>
                 </div>
             </div>
             
-            <div class="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center sm:text-center">
-                   <button style={visible ? "" : "display: none;"} class="rounded-lg dark:bg-orange-400 bg-orange-700 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-500 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center" type="button" onclick="window.location.href='/'">
+            <div class="hide-on-scroll  mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center sm:text-center">
+                   <button style={visible ? "" : "visibility: hidden;"} class="rounded-lg dark:bg-orange-400 bg-orange-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center" type="button" onclick="window.location.href='/'">
                         Home 
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="0.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -31,7 +34,7 @@ const { title } = Astro.props;
                           </svg>
                     </button>
                 </slot>
-                <button onclick="window.location.href='/construction'" class="rounded-lg dark:bg-orange-400 bg-orange-700 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-500 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center" type="button"  >
+                <button onclick="window.location.href='/construction'" class="rounded-lg dark:bg-orange-400 bg-orange-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center" type="button"  >
                     CV 
                     <svg  class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="0.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
