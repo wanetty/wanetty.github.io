@@ -1,6 +1,7 @@
 ---
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+<<<<<<< HEAD
 import BackButton from "@/components/BackButton.astro";
 import { fade  } from 'astro:transitions';
 
@@ -10,13 +11,23 @@ const { frontmatter } = Astro.props;
 <html>
   <Header visible=true title={frontmatter.title}/>
   <body class="bg-slate-100 dark:bg-slate-900" transition:animate={fade({ duration: '1s' })}>
+=======
+const { frontmatter } = Astro.props;
+---
+<html>
+  <Header visible=true title={frontmatter.title}/>
+  <body class="bg-slate-100 dark:bg-slate-900">
+>>>>>>> 2332d83 (Version 0.1.0)
     <br/>
     <h1 class="text-4xl md:text-5xl mx-10 lg:text-6xl font-bold text-center text-gray-900 dark:text-gray-100">{frontmatter.title}</h1>
     <br/>
     <div class="prose sm:prose-sm md:prose-md lg:prose-lg text-justify mx-auto md:max-w-screen-md sm:max-w-screen-sm lg:max-w-screen-lg dark:prose-invert">
         <slot />
     </div>
+<<<<<<< HEAD
     <BackButton />
+=======
+>>>>>>> 2332d83 (Version 0.1.0)
   </body>
   <Footer />
 </html>
