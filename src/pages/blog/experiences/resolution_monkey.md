@@ -5,7 +5,7 @@ description: Learn how to solve a CTF machine in this post. Discover how to perf
 ---
 **Es importante tener en cuenta que el siguiente post contiene spoilers y revela la solución a una máquina de CTF. Si aún no has resuelto la máquina y quieres hacerlo por ti mismo, te recomendamos que no sigas leyendo. ¡Buena suerte resolviendo la máquina!**
 
-https://github.com/wanetty/monkey_vuln_machine
+Descarga la máquina [aquí](https://github.com/wanetty/monkey_vuln_machine)
 
 En los eventos de CTF, los participantes tienen como objetivo encontrar vulnerabilidades en sistemas y aplicaciones para obtener acceso no autorizado y, en última instancia, encontrar la "bandera" o la respuesta a un desafío en particular. En este post, veremos cómo resolver una máquina de CTF siguiendo una serie de pasos.
 
