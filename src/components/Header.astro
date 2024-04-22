@@ -1,8 +1,18 @@
 ---
-const {visible} = Astro.props;
-const { title } = Astro.props;
-
 import { ViewTransitions } from 'astro:transitions';
+import { getServerData } from '@/functions/getTitle.ts';
+
+//const { env } = Astro.locals.runtime;
+const { visible, title } = Astro.props;
+
+// Utiliza la variable de entorno directamente
+
+//const response = await getServerData(env.API_URL);
+//const { mensaje } = await response.json();
+
+
+
+
 ---
 <head>
     <meta charset="UTF-8" />
@@ -18,8 +28,8 @@ import { ViewTransitions } from 'astro:transitions';
             <div class="flex items-center">
                 <img src="/static/avatar.jpg" alt="Wanetty Avatar" class="adjust-on-scroll  h-12 w-12 rounded-full mr-2">
                 <div class="text-center sm:text-left">
-                    <h1 class="dark:text-white text-2xl font-bold adjust-on-scroll  text-gray-900 sm:text-3xl">Welcome to Wanetty Blog</h1>
-                    <p class="hide-on-scroll mt-1.5 text-sm dark:text-gray-200 text-gray-500">Things about my experience in cybersecurity.</p>
+                    <h1 class="dark:text-white text-2xl font-bold adjust-on-scroll  text-gray-900 sm:text-3xl">Welcome to my Blog</h1>
+                    <p class="hide-on-scroll mt-1.5 text-sm dark:text-gray-200 text-gray-500">Things about my experience in Cybersecurity.</p>
                 </div>
             </div>
             

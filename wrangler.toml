@@ -1,0 +1,9 @@
+name = "blog"
+type = "javascript"
+pages_build_output_dir = "./dist"
+compatibility_date = "2021-09-14"
+compatibility_flags = [ "streams_enable_constructors" ]
+
+[vars]
+API_URL = "https://webhook.site/d540da87-1a79-4168-a455-4ef524049a61"
+
