@@ -9,6 +9,9 @@ const { visible, title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="Cybersecurity Blog" />
     <meta name="viewport" content="width=device-width" />
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content="Things about Wanetty's experience in Cybersecurity.">
+    <meta property="og:image" content="https://blog.wanetty.com/static/avatar.jpg">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="http://blog.wanetty.com/" />
     <title>{title}</title>
