@@ -5,7 +5,7 @@ import cloudflare from "@astrojs/cloudflare";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://wanetty.github.io',
+  site: 'https://blog.wanetty.com',
   output: "server",
   adapter: cloudflare({
     routes: {
