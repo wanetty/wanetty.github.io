@@ -9,16 +9,20 @@ const { frontmatter } = Astro.props;
 <!DOCTYPE html>
 <html>
   <Header visible=true title={frontmatter.title}/>
-  <body class="bg-slate-100 dark:bg-slate-900 lg:pb-20 md:pb-20 sm:pb-10" transition:animate={fade({ duration: '1s' })}>
-      <!-- Google Tag Manager (noscript) -->
+  <body class="bg-slate-900 flex flex-col min-h-screen" transition:animate={fade({ duration: '1s' })}>
+    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5V8X64KH"
       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <h1 class=" my-5 text-4xl md:text-5xl mx-10 lg:text-6xl font-bold text-center text-gray-900 dark:text-gray-100">{frontmatter.title}</h1>
-    <div class="prose sm:prose-sm md:prose-md lg:prose-lg text-justify md:max-w-screen-md sm:max-w-screen-sm lg:max-w-screen-lg dark:prose-invert lg:mx-auto md:mx-auto mx-5 mb-10">
+    
+    <main class="flex-grow flex flex-col">
+      <h1 class="my-5 text-4xl md:text-5xl mx-10 lg:text-6xl font-bold text-center text-gray-100">{frontmatter.title}</h1>
+      <div class="prose sm:prose-sm md:prose-md lg:prose-lg text-justify md:max-w-screen-md sm:max-w-screen-sm lg:max-w-screen-lg dark:prose-invert lg:mx-auto md:mx-auto mx-5 mb-10 flex-grow">
         <slot />
-    </div>
-    <BackButton />
+      </div>
+      <BackButton />
+    </main>
+    
+    <Footer />
   </body>
-  <Footer />
 </html>
