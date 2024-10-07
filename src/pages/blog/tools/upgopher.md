@@ -84,11 +84,11 @@ La versión actual de Upgopher se encuentra disponible en la [página de release
 
 A continuación, podemos ver un ejemplo de uso de Upgopher, que se realiza en nuestra máquina local.
 
-![Ejemplo de Uso de Upgopher]("/static/blog/img/ejemplo_ejecucion_upgopher.webp")
+![Ejemplo de Uso de Upgopher](/static/blog/img/ejemplo_ejecucion_upgopher.webp)
 
 Seguidamente vemos como podemos acceder a la interfaz web de Upgopher, que nos permite subir archivos, descargarlos, eliminarlos, navegar por directorios y descargar archivos en formato ZIP.
 
-![Interfaz web de Upgopher]("/static/blog/img/interfaz_web_upgopher.webp")
+![Interfaz web de Upgopher](/static/blog/img/interfaz_web_upgopher.webp)
 
 
 ### Limitaciones y Consideraciones
