@@ -4,7 +4,9 @@ title: Upgopher, Un Análisis Rápido de un Servidor de Archivos Ligero y Eficie
 description: Este artículo ofrece un análisis rápido de Upgopher, un servidor web simple que permite la subida y administración de archivos, y que está diseñado para ser ejecutado tanto en entornos locales como remotos, maximizando la portabilidad y minimizando los problemas de compatibilidad.
 ---
 
-![Logo de Upgopher](/static/blog/img/logopher.webp)
+<p align="center">
+  <img src="/static/blog/img/logopher.webp" alt="Logo de Upgopher">
+</p>
 
 ## ¿Por qué Upgopher?
 
