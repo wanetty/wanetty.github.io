@@ -1,0 +1,18 @@
+{
+    "HEADER": {
+        "TITLE": "Bienvenid@ a mi Blog",
+        "DESCRIPTION": "Cosas sobre mi experiencia en Cyberseguridad."
+    },
+    "SEO": {
+        "TITLE": "Wanetty Blogs",
+        "DESCRIPTION": "Explore la ciberseguridad ofensiva y la preparación para el OSCP con el blog de Wanetty. Profundiza en red teaming, pentesting, desarrollo de exploits y CTF walkthroughs. Técnicas reales de hacking."
+    },
+    "CONSTRUCTION": {
+        "TITLE": "Construcción",
+        "DESCRIPTION": "Esta página está en construcción. Por favor, vuelva más tarde."
+    },
+    "NOTFOUND": {
+        "TITLE": "404 - Página no encontrada",
+        "DESCRIPTION": "No pudimos encontrar esa página."
+    }
+}

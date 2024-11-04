@@ -1,0 +1,26 @@
+---
+import MDLayout from "@/layouts/MDLayout.astro";
+import { getCollection } from "astro:content";
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+
+  return posts.map((post) => ({
+    params: { id: post.slug },
+    props: { post },
+  }));
+}
+const { post } = Astro.props;
+
+const { data } = post;
+const { title, description, SEOTitle } = data;
+
+const { Content } = await post.render();
+---
+
+<MDLayout title={title} description={description} SEOTitle={SEOTitle}>
+    <div class="prose-invert">
+        <Content />
+    </div>
+</MDLayout>

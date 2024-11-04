@@ -1,0 +1,51 @@
+---
+import ChevronIcon from "@/components/icons/Chevron.astro"
+import { LANGUAGES } from '../i18n/ui';
+import { getRouteFromUrl, useTranslatedPath, getLangFromUrl } from '@/i18n/utils';
+
+const route = getRouteFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const currentLocaleData = LANGUAGES[lang]
+const otherLocales = Object.values(LANGUAGES).filter(
+  (locale) => locale.code !== lang
+)
+
+const {newclases = "text-xs sm:text-sm", isMobile = false} = Astro.props;
+---
+
+<div class="flex items-center justify-center relative">
+  <div
+    class={`${newclases} group text-white rounded-md font-semibold bg-black/30 hover:bg-black/70 transition-all`}
+  >
+    <button
+      type="button"
+      class="inline-flex justify-start items-center w-full gap-x-2 px-2 sm:px-3 py-2"
+      aria-expanded="true"
+      aria-haspopup="true"
+    >
+      <currentLocaleData.flag />
+      <span class={isMobile ? "inline" : "hidden 2xl:inline"}>{currentLocaleData.name}</span>
+      <ChevronIcon />
+    </button>
+    <ul
+      class="group-hover:block group-hover:animate-fade-down group-hover:animate-duration-200 hidden pt-0.5 absolute w-full"
+    >
+      {
+        otherLocales.map((locale) => (
+          <li class="py-[2px]">
+            <a
+              class="rounded-md bg-black/30 hover:bg-black/70 whitespace-no-wrap inline-flex justify-start items-center w-full gap-x-2 px-2 sm:px-3 py-2"
+              href={translatePath(`/${route ? route : ''}`, locale.code)}
+              data-astro-reload
+            >
+              <locale.flag />
+              <span class={isMobile ? "inline" : "hidden 2xl:inline"}>{locale.name}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

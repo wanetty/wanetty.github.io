@@ -1,7 +1,11 @@
 ---
-layout: /src/layouts/MDLayout.astro
 title: Password Security Policies (PSO) in Active Directory (AD)
 description: Password Security Policies (PSO) in Active Directory (AD) are a critical component in a corporate network's security infrastructure. PSOs allow system administrators to enforce strict and customized rules for password creation and usage across the network, thus ensuring that all users adhere to best information security practices.
+snippetone: Technologies    
+category: Technologies
+SEOTitle: PSO
+lang: en
+date: 2023-08-04
 ---
 ## Introduction
 
@@ -42,7 +46,7 @@ As a member of a red team, understanding and enumerating Password Security Polic
 
 To effectively enumerate and scrutinize the PSO, it's crucial to utilize alternative approaches. One such powerful tool at your disposal, particularly during penetration testing, is <a href="https://github.com/mpgn/CrackMapExec" >CrackMapExec</a> (CME). CME is a swiss army knife for offensive security practitioners, useful for reconnaissance and exploiting network vulnerabilities. Recently, a new module has been <a href="https://github.com/mpgn/CrackMapExec/pull/3">added</a> to CME, specifically designed to facilitate the enumeration of PSO in AD environments.
 
-![Module executed](/static/blog/img/pso_cme.png)
+![Module PSO executed](/static/blog/img/pso_cme.png)
 
 ## Conclusions
 

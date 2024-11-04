@@ -1,11 +1,15 @@
 ---
-layout: /src/layouts/MDLayout.astro
-title: Upgopher, Un Análisis Rápido de un Servidor de Archivos Ligero y Eficiente
+title: Upgopher, Un Servidor de Archivos Ligero y Eficiente
 description: Este artículo ofrece un análisis rápido de Upgopher, un servidor web simple que permite la subida y administración de archivos, y que está diseñado para ser ejecutado tanto en entornos locales como remotos, maximizando la portabilidad y minimizando los problemas de compatibilidad.
+snippetone: Tools
+category: Tools
+SEOTitle: Upgopher
+lang: es
+date: 2024-10-07
 ---
 
 <p align="center">
-  <img src="/static/blog/img/logopher.webp" alt="Logo de Upgopher">
+  <img src="/static/blog/img/logopher.webp" alt="Upgopher Logo" width="30%">
 </p>
 
 ## ¿Por qué Upgopher?

@@ -9,11 +9,12 @@ export default defineConfig({
   integrations: [tailwind(), sitemap()],
   site: 'https://blog.wanetty.com',
   output: "server",
-  adapter: cloudflare({
-    routes: {
-      extend: {
-        exclude: [{ pattern: '/pages/blog/*' }], 
-      }
+  adapter: cloudflare({}),
+  i18n: {
+    defaultLocale: "es",
+    locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: false,
     },
-  }),
+  },
 });

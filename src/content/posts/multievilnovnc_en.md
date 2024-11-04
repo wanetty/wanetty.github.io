@@ -1,7 +1,11 @@
 ---
-layout: /src/layouts/MDLayout.astro
 title: Setting Up MultiEvilnoVNC with HTTPS
 description: This guide provides detailed instructions for setting up MultiEvilNoVNC, including preparing Docker containers, configuring Nginx, obtaining SSL certificates with Certbot, and modifying the startup script to ensure proper functionality. Additionally, it covers how to run the tool and manage and view sessions of websites visited by users.
+snippetone: Tools
+category: Tools
+SEOTitle: MultiEvilnoVNC
+lang: en
+date: 2024-07-18
 ---
 
 

@@ -1,10 +1,12 @@
 ---
-layout: /src/layouts/MDLayout.astro
+title: PoFish, a docker for phishing
 description: Lately I have been making several phishing attempts. For one thing or another I have had to perform the same configuration of the same applications in different environments. For this reason I have created a DockerFile which once built, can be deployed with different options to perform a phishing exercise.
+snippetone: Tools
+category: Tools
+SEOTitle: PoFish
+lang: en
+date: 2023-07-01
 ---
-
-# A new docker for phishing (PoFish)
-
 
 Repo: [Github Repo](https://github.com/wanetty/PoFish)
 

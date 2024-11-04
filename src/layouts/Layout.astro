@@ -1,19 +1,26 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import { getI18N } from "@/i18n/index"
+import { getLangFromUrl, useTranslations, useTranslatedPath, } from '@/i18n/utils';
 
+const { currentLocale } = Astro
+
+const { title } = Astro.props;
+const i18n = getI18N({ currentLocale })
+
+const lang = getLangFromUrl(Astro.url);
 interface Props {
 	title: string;
 }
 
-const { title } = Astro.props;
 
 ---
 
 <!doctype html>
-<html  lang="en">
+<html  lang={lang}>
 
-	<Header title={title}/>
+	<Header title=`${i18n.SEO.TITLE}&nbsp;${new Date().getFullYear()}&nbsp;|&nbsp;${title}` description={i18n.SEO.DESCRIPTION}/>
 	<body class="bg-slate-900 flex flex-col min-h-screen" transition:animate="fade">
 		<!-- Google Tag Manager (noscript) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5V8X64KH"

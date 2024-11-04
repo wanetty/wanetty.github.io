@@ -1,8 +1,11 @@
 ---
-layout: /src/layouts/MDLayout.astro
 title: Mi experiencia con el OSCP
-description: Post in which I talk about my experience in the adventure of becoming OSCP certified.
-
+description: Experiencia en el Examen OSCP - Revisión Detallada, Consejos y Travesía para Aprobar la Certificación Offensive Security Certified Professional | Perspectivas Personales de los Laboratorios PWK y el Desafío de 24 Horas de Pentesting.
+snippetone: Experiences
+category: Experiences
+SEOTitle: Experiencia con OSCP
+lang: es
+date: 2023-07-01
 ---
 
 **Atención:** Este post habla sobre experiencias mías, no habla sobre nada técnico.

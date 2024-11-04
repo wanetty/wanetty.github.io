@@ -3,12 +3,21 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import BackButton from "@/components/BackButton.astro";
 import { fade  } from 'astro:transitions';
+import { getI18N } from "@/i18n/index"
+import { getLangFromUrl, useTranslations, useTranslatedPath, } from '@/i18n/utils';
 
-const { frontmatter } = Astro.props;
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const lang = getLangFromUrl(Astro.url);
+
+const { SEOTitle, title, description } = Astro.props;
 ---
-<!DOCTYPE html>
-<html>
-  <Header visible=true title={frontmatter.title}/>
+
+<!doctype html>
+<html  lang={lang}>
+
+  <Header visible=true title=`${i18n.SEO.TITLE}&nbsp;${new Date().getFullYear()}&nbsp;|&nbsp;${SEOTitle}` description={description}/>
   <body class="bg-slate-900 flex flex-col min-h-screen" transition:animate={fade({ duration: '1s' })}>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5V8X64KH"
@@ -16,7 +25,7 @@ const { frontmatter } = Astro.props;
     <!-- End Google Tag Manager (noscript) -->
     
     <main class="flex-grow flex flex-col">
-      <h1 class="my-5 text-4xl md:text-5xl mx-10 lg:text-6xl font-bold text-center text-gray-100">{frontmatter.title}</h1>
+      <h1 class="my-5 text-4xl md:text-5xl mx-10 lg:text-6xl font-bold text-center text-gray-100">{title}</h1>
       <div class="prose sm:prose-sm md:prose-md lg:prose-lg text-justify md:max-w-screen-md sm:max-w-screen-sm lg:max-w-screen-lg dark:prose-invert lg:mx-auto md:mx-auto mx-5 mb-10 flex-grow">
         <slot />
       </div>

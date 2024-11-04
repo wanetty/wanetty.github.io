@@ -1,7 +1,16 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import LanguajeSelector from './LanguajeSelector.astro';
+import { getI18N } from "@/i18n/index"
+import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
 
-const { visible, title } = Astro.props;
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const { visible, title, description } = Astro.props;
 
 // Header.astro
 
@@ -18,10 +27,10 @@ const currentPath = Astro.url.pathname;
     gtag('config', 'G-CNGRD8TW34');
     </script>
     <meta charset="UTF-8" />
-    <meta name="description" content="Welcome to my personal blog delving into the realm of cybersecurity! Explore cutting-edge research, insightful analyses, and practical tips to navigate the ever-evolving landscape of digital security" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <meta property="og:title" content={title}>
-    <meta property="og:description" content="Things about Wanetty's experience in Cybersecurity.">
+    <meta property="og:description" content={i18n.SEO.DESCRIPTION}>
     <meta property="og:image" content="https://blog.wanetty.com/static/avatar.jpg">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="http://blog.wanetty.com/" />
@@ -33,32 +42,35 @@ const currentPath = Astro.url.pathname;
   <div class="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
       <div class="flex items-center mb-4 sm:mb-0">
-        <img src="/static/avatar.jpg" alt="Wanetty Avatar" class="h-10 w-10 rounded-full mr-3">
+        <a href={translatePath('/')}>
+          <img src="/static/avatar.jpg" alt="Wanetty Avatar" class="h-10 w-10 rounded-full mr-3 cursor-pointer hover:opacity-80 transition-opacity">
+        </a>
         <div>
-          <h1 class="text-xl font-bold text-white sm:text-2xl">Welcome to my Blog</h1>
-          <p class="mt-1 text-sm text-gray-200">Things about my experience in Cybersecurity.</p>
+          <h1 class="text-xl font-bold text-white sm:text-2xl">{i18n.HEADER.TITLE}</h1>
+          <p class="mt-1 text-sm text-gray-200">{i18n.HEADER.DESCRIPTION}</p>
         </div>
       </div>
       
       <div class="flex flex-col sm:flex-row gap-3 sm:items-center" id="nav-buttons">
-        <button style={visible ? "" : "visibility: hidden;"} class="rounded-lg bg-orange-400 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center" type="button" onclick="window.location.href='/'">
-          Home 
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="0.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-            <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-            <path d="M10 12h4v4h-4z" />
-          </svg>
-        </button>
-        <button onclick="window.location.href='/construction'" class="rounded-lg bg-orange-400 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center" type="button">
-          CV 
-          <svg  class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="0.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
-            <path d="M13 8l2 0" />
-            <path d="M13 12l2 0" />
-          </svg>     
-        </button>
+      <LanguajeSelector />
+      <a href={translatePath('/')} style={visible ? "" : "visibility: hidden;"} class="rounded-lg bg-orange-400 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center">
+        Home 
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="0.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+          <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+          <path d="M10 12h4v4h-4z" />
+        </svg>
+      </a>
+      <!-- <a href={translatePath('/construction')} style="display: none"  class="rounded-lg bg-orange-400 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center">
+        CV 
+        <svg class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="0.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
+          <path d="M13 8l2 0" />
+          <path d="M13 12l2 0" />
+        </svg>     
+      </a> -->
       </div>
     </div>
   </div>
