@@ -14,9 +14,31 @@ const { visible, title, description } = Astro.props;
 
 // Header.astro
 
-const currentPath = Astro.url.pathname;
+
 ---
 <head>
+    <!-- Metadatos existentes -->
+    <link rel="canonical" href={new URL(Astro.url.pathname, 'https://blog.wanetty.com').toString()} />
+    <link rel="alternate" hreflang="es" href="https://blog.wanetty.com/">
+    <link rel="alternate" hreflang="en" href="https://blog.wanetty.com/en/">
+    <link rel="alternate" hreflang="x-default" href="https://blog.wanetty.com/">
+    <!-- OpenGraph mejorado -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={Astro.url}>
+    <meta property="og:site_name" content={i18n.HEADER.TITLE}>
+    <meta property="og:locale" content={currentLocale}>
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content="https://blog.wanetty.com/static/avatar.jpg">
+    
+    <!-- Metadatos adicionales -->
+    <meta name="author" content="Wanetty">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="blog, tecnología, cyberseguridad, cybersecurity, OSCP, EvilNoVNC, RedTeam, CRTO"> 
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNGRD8TW34"></script>
     <script>
@@ -29,9 +51,7 @@ const currentPath = Astro.url.pathname;
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
-    <meta property="og:title" content={title}>
-    <meta property="og:description" content={i18n.SEO.DESCRIPTION}>
-    <meta property="og:image" content="https://blog.wanetty.com/static/avatar.jpg">
+    
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="http://blog.wanetty.com/" />
     <link rel="sitemap" href="/sitemap-index.xml" />
