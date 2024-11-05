@@ -50,7 +50,7 @@ Get-ADFineGrainedPasswordPolicy -Filtro *
 
 Como miembro de un equipo rojo, comprender y enumerar las políticas de seguridad de contraseñas (PSO) en Active Directory (AD) es una parte fundamental de sus tareas. Sin embargo, hay ocasiones en las que los métodos convencionales pueden no proporcionar la imagen completa. Por ejemplo, puede encontrarse con situaciones en las que la política de contraseñas observable no coincide con la política activa. Esta discrepancia puede dar lugar a confusión y a posibles vulnerabilidades.
 
-Para enumerar y escudriñar eficazmente la OSP, es crucial utilizar enfoques alternativos. Una de estas poderosas herramientas a tu disposición, particularmente durante las pruebas de penetración, es <a href=«https://github.com/mpgn/CrackMapExec» >CrackMapExec</a> (CME). CME es una navaja suiza para los profesionales de la seguridad ofensiva, útil para el reconocimiento y la explotación de vulnerabilidades de la red. Recientemente, se ha <a href=«https://github.com/mpgn/CrackMapExec/pull/3»>añadido</a> un nuevo módulo a CME, diseñado específicamente para facilitar la enumeración de PSO en entornos AD.
+Para enumerar y escudriñar eficazmente la OSP, es crucial utilizar enfoques alternativos. Una de estas poderosas herramientas a tu disposición, particularmente durante las pruebas de penetración, es [NetExec](https://github.com/Pennyw0rth/NetExec). NetExec es una navaja suiza para los profesionales de la seguridad ofensiva, útil para el reconocimiento y la explotación de vulnerabilidades de la red. Recientemente, se ha [añadido](https://github.com/mpgn/CrackMapExec/pull/3) un nuevo módulo a CME, diseñado específicamente para facilitar la enumeración de PSO en entornos AD.
 
 ![Módulo PSO ejecutado](/static/blog/img/pso_cme.png)
 

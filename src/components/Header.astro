@@ -39,40 +39,54 @@ const currentPath = Astro.url.pathname;
     <ViewTransitions />
 </head>
 <header class="sticky top-0 z-50 w-full border-b border-orange-300 bg-slate-600 backdrop-blur supports-[backdrop-filter]:bg-slate-600/60 dark">
-  <div class="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-      <div class="flex items-center mb-4 sm:mb-0">
+  <div class="container mx-auto px-4 py-3 sm:py-4">
+    <nav class="flex items-center justify-between">
+      <!-- Logo y título -->
+      <div class="flex items-center gap-2 sm:gap-3">
         <a href={translatePath('/')}>
-          <img src="/static/avatar.jpg" alt="Wanetty Avatar" class="h-10 w-10 rounded-full mr-3 cursor-pointer hover:opacity-80 transition-opacity">
+          <img 
+            src="/static/avatar.jpg" 
+            alt="Wanetty Avatar" 
+            class="h-8 w-8 sm:h-10 sm:w-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+          >
         </a>
-        <div>
-          <h1 class="text-xl font-bold text-white sm:text-2xl">{i18n.HEADER.TITLE}</h1>
-          <p class="mt-1 text-sm text-gray-200">{i18n.HEADER.DESCRIPTION}</p>
+        <div class="hidden sm:block">
+          <h1 class="text-xl font-bold text-white">{i18n.HEADER.TITLE}</h1>
+          <p class="text-sm text-gray-200">{i18n.HEADER.DESCRIPTION}</p>
+        </div>
+        <!-- Título móvil más compacto -->
+        <div class="sm:hidden">
+          <h1 class="text-lg font-bold text-white">{i18n.HEADER.TITLE}</h1>
         </div>
       </div>
-      
-      <div class="flex flex-col sm:flex-row gap-3 sm:items-center" id="nav-buttons">
-      <LanguajeSelector />
-      <a href={translatePath('/')} style={visible ? "" : "visibility: hidden;"} class="rounded-lg bg-orange-400 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center">
-        Home 
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="0.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-          <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-          <path d="M10 12h4v4h-4z" />
-        </svg>
-      </a>
-      <!-- <a href={translatePath('/construction')} style="display: none"  class="rounded-lg bg-orange-400 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex justify-center items-center gap-2 sm:text-center">
-        CV 
-        <svg class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="0.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
-          <path d="M13 8l2 0" />
-          <path d="M13 12l2 0" />
-        </svg>     
-      </a> -->
+
+      <!-- Navegación -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <LanguajeSelector newclases="text-xs sm:text-sm" />
+        
+        {visible && (
+          <a 
+            href={translatePath('/')} 
+            class="rounded-lg bg-orange-400 px-3 py-2 sm:px-4 sm:py-2 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex items-center gap-2"
+          >
+            <span class="hidden sm:inline">Home</span>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              class="w-5 h-5" 
+              viewBox="0 0 24 24" 
+              stroke-width="0.5" 
+              stroke="currentColor" 
+              fill="none" 
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+              <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+              <path d="M10 12h4v4h-4z" />
+            </svg>
+          </a>
+        )}
       </div>
-    </div>
+    </nav>
   </div>
 </header>
 

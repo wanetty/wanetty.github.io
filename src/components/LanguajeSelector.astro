@@ -19,33 +19,31 @@ const {newclases = "text-xs sm:text-sm", isMobile = false} = Astro.props;
   <div
     class={`${newclases} group text-white rounded-md font-semibold bg-black/30 hover:bg-black/70 transition-all`}
   >
+  <div class="relative group">
     <button
       type="button"
-      class="inline-flex justify-start items-center w-full gap-x-2 px-2 sm:px-3 py-2"
+      class={`${newclases} flex items-center gap-1 text-white rounded-md font-medium bg-black/30 hover:bg-black/70 transition-all px-2 py-2 sm:px-3`}
       aria-expanded="true"
       aria-haspopup="true"
     >
       <currentLocaleData.flag />
-      <span class={isMobile ? "inline" : "hidden 2xl:inline"}>{currentLocaleData.name}</span>
+      <span class="hidden sm:inline">{currentLocaleData.name}</span>
       <ChevronIcon />
     </button>
-    <ul
-      class="group-hover:block group-hover:animate-fade-down group-hover:animate-duration-200 hidden pt-0.5 absolute w-full"
-    >
-      {
-        otherLocales.map((locale) => (
-          <li class="py-[2px]">
-            <a
-              class="rounded-md bg-black/30 hover:bg-black/70 whitespace-no-wrap inline-flex justify-start items-center w-full gap-x-2 px-2 sm:px-3 py-2"
-              href={translatePath(`/${route ? route : ''}`, locale.code)}
-              data-astro-reload
-            >
-              <locale.flag />
-              <span class={isMobile ? "inline" : "hidden 2xl:inline"}>{locale.name}</span>
-            </a>
-          </li>
-        ))
-      }
+  
+    <ul class="group-hover:block group-hover:animate-fade-down group-hover:animate-duration-200 hidden pt-0.5 absolute w-full">
+      {otherLocales.map((locale) => (
+        <li class="py-[2px]">
+          <a
+            class="rounded-md bg-black/30 hover:bg-black/70 whitespace-no-wrap flex items-center gap-1 w-full px-2 py-2 sm:px-3"
+            href={translatePath(`/${route ? route : ''}`, locale.code)}
+            data-astro-reload
+          >
+            <locale.flag />
+            <span class="hidden sm:inline">{locale.name}</span>
+          </a>
+        </li>
+      ))}
     </ul>
   </div>
 </div>

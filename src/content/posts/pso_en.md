@@ -44,7 +44,7 @@ Get-ADFineGrainedPasswordPolicy -Filter *
 
 As a member of a red team, understanding and enumerating Password Security Policies (PSO) in Active Directory (AD) is a critical part of your duties. However, there are times when conventional methods may not provide the complete picture. For instance, you may encounter situations where the observable password policy does not match the active policy. This discrepancy can often lead to confusion and potential vulnerabilities.
 
-To effectively enumerate and scrutinize the PSO, it's crucial to utilize alternative approaches. One such powerful tool at your disposal, particularly during penetration testing, is <a href="https://github.com/mpgn/CrackMapExec" >CrackMapExec</a> (CME). CME is a swiss army knife for offensive security practitioners, useful for reconnaissance and exploiting network vulnerabilities. Recently, a new module has been <a href="https://github.com/mpgn/CrackMapExec/pull/3">added</a> to CME, specifically designed to facilitate the enumeration of PSO in AD environments.
+To effectively enumerate and scrutinize the PSO, it's crucial to utilize alternative approaches. One such powerful tool at your disposal, particularly during penetration testing, is [NetExec](https://github.com/Pennyw0rth/NetExec). NetExec is a swiss army knife for offensive security practitioners, useful for reconnaissance and exploiting network vulnerabilities. Recently, a new module has been [added](https://github.com/mpgn/CrackMapExec/pull/3) to CME, specifically designed to facilitate the enumeration of PSO in AD environments.
 
 ![Module PSO executed](/static/blog/img/pso_cme.png)
 
