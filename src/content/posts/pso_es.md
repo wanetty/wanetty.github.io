@@ -38,7 +38,7 @@ Enumerar las Políticas de Seguridad de Contraseñas (PSO) en un entorno Active 
 
 2. **Utilizando PowerShell:** PowerShell es un potente lenguaje de scripting y shell framework utilizado para la automatización de tareas y la gestión de la configuración. Puede enumerar PSO utilizando el cmdlet `Get-ADFineGrainedPasswordPolicy`. He aquí un ejemplo básico de cómo utilizar este cmdlet para enumerar todas las PSO:
 
-```powerershell
+```powershell
 Import-Module ActiveDirectory
 Get-ADFineGrainedPasswordPolicy -Filtro *
 ```
