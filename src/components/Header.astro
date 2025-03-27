@@ -135,11 +135,6 @@ const { visible, title, description } = Astro.props;
       });
     }
     
-    if (cvButton) {
-      cvButton.addEventListener('click', () => {
-        window.location.href = '/construction';
-      });
-    }
   });
 
   document.addEventListener('astro:before-swap', () => {
