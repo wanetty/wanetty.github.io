@@ -3,44 +3,61 @@ import ChevronIcon from "@/components/icons/Chevron.astro"
 import { LANGUAGES } from '../i18n/ui';
 import { getRouteFromUrl, useTranslatedPath, getLangFromUrl } from '@/i18n/utils';
 
+// Obtenemos información básica sobre la URL actual
 const route = getRouteFromUrl(Astro.url);
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 
-// Determinar si estamos en una URL de post
-const isPostPage = Astro.url.pathname.includes('/post/');
-let postId = '';
+// Analizar la URL actual para detectar patrones específicos
+const pathname = Astro.url.pathname;
+const isPostPage = pathname.includes('/post/');
+
+// Extraer el slug del post actual si estamos en una página de post
+let currentSlug = '';
 if (isPostPage) {
-  const parts = Astro.url.pathname.split('/');
-  postId = parts[parts.length - 1]; // Obtenemos el ID del post de la URL
+  const parts = pathname.split('/');
+  // Filtrar partes vacías que pueden ocurrir por slash final
+  const filteredParts = parts.filter(part => part.length > 0);
+  currentSlug = filteredParts[filteredParts.length - 1]; // Último segmento no vacío de la URL
 }
 
-// Función para generar la URL correcta según el idioma
+// Función para obtener el nombre base de un post sin el sufijo de idioma
+const getBaseSlug = (slug: string): string => {
+  if (slug.endsWith('_es')) return slug.slice(0, -3);
+  if (slug.endsWith('_en')) return slug.slice(0, -3);
+  return slug;
+};
+
+// Función mejorada para generar URLs según el idioma seleccionado
 const getUrlForLanguage = (targetLang: string) => {
-  if (isPostPage) {
-    // Si estamos en una página de post, mantener el ID del post pero cambiar el idioma
-    // Tenemos que cambiar el nombre del archivo MD según el idioma
-    // Ejemplo: si estamos en /post/log4j_exploit_es y cambiamos a en, debería ir a /en/post/log4j_exploit_en
+  // CASO 1: Estamos en una página de post
+  if (isPostPage && currentSlug) {
+    // Obtener el slug base (sin sufijo de idioma)
+    const baseSlug = getBaseSlug(currentSlug);
     
-    // Extraer el nombre base del post (sin el sufijo de idioma)
-    let basePostId = postId;
-    if (postId.endsWith('_es') || postId.endsWith('_en')) {
-      basePostId = postId.slice(0, -3); // Remover el sufijo _xx
+    // Si el slug base está vacío, significa que algo está mal
+    if (!baseSlug) {
+      console.error('Error: No se pudo determinar el slug base del post');
+      return translatePath('/', targetLang); // Volver a inicio como fallback
     }
     
-    // Construir el nuevo ID con el sufijo del idioma objetivo
-    const newPostId = `${basePostId}_${targetLang}`;
-    return `/${targetLang === 'es' ? '' : targetLang + '/'}post/${newPostId}`;
-  } 
+    // Crear el nuevo slug para el idioma de destino
+    const newSlug = `${baseSlug}_${targetLang}`;
+    
+    // Generar la URL correcta según el idioma
+    // Para español: /post/slug_es/
+    // Para inglés: /en/post/slug_en/
+    return `/${targetLang === 'es' ? '' : targetLang + '/'}post/${newSlug}/`;
+  }
   
   // Si no estamos en un post, usar la lógica normal de traducción
   return translatePath(`/${route ? route : ''}`, targetLang);
 };
 
-const currentLocaleData = LANGUAGES[lang]
+const currentLocaleData = LANGUAGES[lang];
 const otherLocales = Object.values(LANGUAGES).filter(
   (locale) => locale.code !== lang
-)
+);
 
 const {newclases = "text-xs sm:text-sm", isMobile = false} = Astro.props;
 ---
@@ -62,7 +79,7 @@ const {newclases = "text-xs sm:text-sm", isMobile = false} = Astro.props;
     </button>
   
     <ul class="group-hover:block group-hover:animate-fade-down group-hover:animate-duration-200 hidden pt-0.5 absolute w-full">
-      {otherLocales.map((locale) => (
+      {otherLocales.map((locale: { code: string, flag: any, name: string }) => (
         <li class="py-[2px]">
           <a
             class="rounded-md bg-black/30 hover:bg-black/70 whitespace-no-wrap flex items-center gap-1 w-full px-2 py-2 sm:px-3"
