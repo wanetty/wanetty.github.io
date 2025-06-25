@@ -5,30 +5,148 @@ import BackButton from "@/components/BackButton.astro";
 import { fade  } from 'astro:transitions';
 import { getI18N } from "@/i18n/index"
 import { getLangFromUrl, useTranslations, useTranslatedPath, } from '@/i18n/utils';
+import ShareButtons from "@/components/ShareButtons.astro";
 
 const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
 const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
-const { SEOTitle, title, description } = Astro.props;
+const { SEOTitle, title, description, publishDate, updateDate, imageUrl, tags = [], category } = Astro.props;
+
+// Formatear fecha para Schema.org
+const pubDate = publishDate ? new Date(publishDate).toISOString() : new Date().toISOString();
+const modDate = updateDate ? new Date(updateDate).toISOString() : pubDate;
+
+// Crear URL canónica para compartir
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname;
 ---
 
 <!doctype html>
-<html  lang={lang}>
-
-  <Header visible=true title=`${i18n.SEO.TITLE}&nbsp;${new Date().getFullYear()}&nbsp;|&nbsp;${SEOTitle}` description={description}/>
-  <body class="bg-slate-900 flex flex-col min-h-screen" transition:animate={fade({ duration: '1s' })}>
+<html lang={lang} dir="ltr">
+  <Header 
+    visible={true} 
+    title={`${i18n.SEO.TITLE} ${new Date().getFullYear()} | ${SEOTitle}`} 
+    description={description}
+  />
+  <body class="bg-slate-900 flex flex-col min-h-screen" transition:animate={fade({ duration: '1s' })} itemscope itemtype="http://schema.org/BlogPosting">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5V8X64KH"
       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     
+    <!-- Schema.org Metadata para BlogPosting -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "${title}",
+        "description": "${description}",
+        "datePublished": "${pubDate}",
+        "dateModified": "${modDate}",
+        "image": "${imageUrl || 'https://blog.wanetty.com/static/avatar.jpg'}",
+        "author": {
+          "@type": "Person",
+          "name": "Wanetty"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Wanetty Blog",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://blog.wanetty.com/static/avatar.jpg"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "${canonicalURL}"
+        },
+        "keywords": "${tags.join(', ')}",
+        "inLanguage": "${currentLocale}"
+      }
+    </script>
+    
     <main class="flex-grow flex flex-col">
-      <h1 class="my-5 text-4xl md:text-5xl mx-10 lg:text-6xl font-bold text-center text-gray-100">{title}</h1>
-      <div class="prose sm:prose-sm md:prose-md lg:prose-lg text-justify md:max-w-screen-md sm:max-w-screen-sm lg:max-w-screen-lg dark:prose-invert lg:mx-auto md:mx-auto mx-5 mb-10 flex-grow">
-        <slot />
-      </div>
+      <article class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-4">
+        <!-- Header compacto y elegante -->
+        <header class="mb-6">
+          <!-- Título y metadatos con diseño compacto -->
+          <div class="border-l-4 border-orange-500 pl-4 py-2">
+            <!-- Título principal -->
+            <h1 class="text-2xl md:text-3xl font-bold text-white leading-snug" itemprop="headline">
+              {title}
+            </h1>
+            
+            <!-- Metadatos en línea -->
+            <div class="flex flex-wrap items-center text-xs text-gray-400 gap-x-3 mt-2">
+              {publishDate && (
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <time datetime={pubDate} itemprop="datePublished">{
+                    new Date(publishDate).toLocaleDateString(currentLocale, {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric'
+                    })
+                  }</time>
+                </div>
+              )}
+              
+              {updateDate && updateDate !== publishDate && (
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <span class="text-xs">{i18n.BLOG?.UPDATED || 'Actualizado'}</span>
+                </div>
+              )}
+              
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span itemprop="author" class="text-xs">Wanetty</span>
+              </div>
+              
+              {category && (
+                <span class="text-xs font-medium text-orange-300">
+                  <span class="mr-1">•</span>{category}
+                </span>
+              )}
+            </div>
+          </div>
+          
+          <!-- Tags en forma de pildoras discretas -->
+          {tags && tags.length > 0 && (
+            <div class="flex flex-wrap gap-1 my-3">
+              {tags.map((tag: string) => (
+                <span class="px-2 py-0.5 bg-slate-800 text-xs text-gray-300 rounded-md">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </header>
+        
+        <!-- Contenido del post -->
+        <div class="prose sm:prose-sm md:prose-md lg:prose-lg text-justify dark:prose-invert lg:mx-auto md:mx-auto mx-0 mb-6" itemprop="articleBody">
+          <slot />
+        </div>
+        
+        <!-- Botones para compartir -->
+        <div class="mt-8 border-t border-gray-700 pt-4">
+          <ShareButtons 
+            url={canonicalURL} 
+            title={title} 
+            description={description}
+            imageUrl={imageUrl}
+          />
+        </div>
+      </article>
+      
       <BackButton />
     </main>
     

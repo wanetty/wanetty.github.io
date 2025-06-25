@@ -1,35 +1,58 @@
 ---
+import { getI18N } from "@/i18n/index";
+import { getLangFromUrl } from '@/i18n/utils';
+
 interface Props {
     title: string;
     description: string;
     snippetone: string;
     link: string;
+    date?: Date;
 }
 
-const { title, description, snippetone, link } = Astro.props;
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+const lang = getLangFromUrl(Astro.url);
+
+const { title, description, snippetone, link, date } = Astro.props;
+
+// Formatear fecha si está disponible
+const formattedDate = date 
+  ? new Date(date).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    }) 
+  : null;
 ---
 
-<a href={link} class="block h-full group">
-    <article class="relative flex flex-col justify-between p-6 bg-white rounded-xl border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700 w-full h-full transition-all duration-300">
+<a href={link} class="block h-full group" rel="prefetch" aria-labelledby={`article-${title.replace(/\s+/g, '-').toLowerCase()}`}>
+    <article class="relative flex flex-col justify-between p-6 bg-white rounded-xl border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700 w-full h-full transition-all duration-300" itemscope itemtype="http://schema.org/Article">
         <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none glow-effect"></div>
         <div>
             <div class="flex justify-between items-center mb-5">
                 <span class="relative inline-block px-3 py-1 font-mono text-xs font-semibold text-orange-800 dark:text-orange-200 uppercase rounded">
                     <span class="absolute inset-0 bg-orange-200 dark:bg-orange-700 opacity-50 rounded filter blur-[1px]"></span>
-                    <span class="relative mix-blend-hard-light dark:mix-blend-soft-light">
+                    <span class="relative mix-blend-hard-light dark:mix-blend-soft-light" itemprop="keywords">
                         &lt;{snippetone}/&gt;
                     </span>
                 </span>
+                {formattedDate && (
+                    <time datetime={date?.toISOString()} class="text-sm text-gray-500 dark:text-gray-400" itemprop="datePublished">
+                        {formattedDate}
+                    </time>
+                )}
             </div>
-            <h2 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors duration-300">{title}</h2>
-            <p class="mb-5 text-gray-600 dark:text-gray-300 line-clamp-3">{description}</p>
+            <h2 id={`article-${title.replace(/\s+/g, '-').toLowerCase()}`} class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors duration-300" itemprop="headline">{title}</h2>
+            <p class="mb-5 text-gray-600 dark:text-gray-300 line-clamp-3" itemprop="description">{description}</p>
         </div>
         <div class="flex justify-end items-center mt-auto">
             <span class="inline-flex items-center font-medium text-orange-500 dark:text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-300 transition-colors duration-300">
-                Read more
-                <svg class="ml-2 w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                {i18n.BLOG.READ_MORE}
+                <svg class="ml-2 w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
+                <span class="sr-only">{i18n.BLOG.READ_MORE} {title}</span>
             </span>
         </div>
     </article>

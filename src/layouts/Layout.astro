@@ -6,31 +6,39 @@ import { getLangFromUrl, useTranslations, useTranslatedPath, } from '@/i18n/util
 
 const { currentLocale } = Astro
 
-const { title } = Astro.props;
+const { title, description, imageUrl, type = "website" } = Astro.props;
 const i18n = getI18N({ currentLocale })
 
 const lang = getLangFromUrl(Astro.url);
 interface Props {
 	title: string;
+	description?: string;
+	imageUrl?: string;
+	type?: 'website' | 'article' | 'blog';
 }
 
-
+// Asegurarse de que tenemos una descripción
+const pageDescription = description || i18n.SEO.DESCRIPTION;
 ---
 
 <!doctype html>
-<html  lang={lang}>
-
-	<Header title=`${i18n.SEO.TITLE}&nbsp;${new Date().getFullYear()}&nbsp;|&nbsp;${title}` description={i18n.SEO.DESCRIPTION}/>
-	<body class="bg-slate-900 flex flex-col min-h-screen" transition:animate="fade">
+<html lang={lang} dir="ltr">
+	<Header 
+		title={`${i18n.SEO.TITLE} ${new Date().getFullYear()} | ${title}`}
+		description={pageDescription}
+	/>
+	<body class="bg-slate-900 flex flex-col min-h-screen" itemscope itemtype="http://schema.org/WebPage">
 		<!-- Google Tag Manager (noscript) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5V8X64KH"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-		<div class="flex-grow">
+		
+		<main class="flex-grow" id="main-content">
 		  <slot />
-		</div>
+		</main>
+		
 		<Footer />
-	  </body>
+	</body>
 </html>
 <style is:global>
 	code {

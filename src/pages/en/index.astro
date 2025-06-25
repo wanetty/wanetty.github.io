@@ -13,35 +13,66 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
+// Obtener y ordenar las publicaciones por fecha
 const posts = await getCollection('posts', ({ data }) => {
   return data.lang === lang;
 });
 
+const sortedPosts = posts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Generar URL canónica
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Metadatos para listado de publicaciones
+const pageTitle = i18n.SEO.TITLE;
+const pageDescription = i18n.SEO.DESCRIPTION;
 ---
 
-<Layout title="Posts">
-  <div class="grid grid-cols-12 gap-4 mx-5 my-5">
-    {posts
-      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-      .map((post => {
-        const { title, description, snippetone } = post.data;
-        const { slug } = post
-        let link = "";
-        if (lang !== "es") {
-          link = "/" + lang + "/post/" + slug
-        }else {
-          link = "/post/" + slug
-        }
-        return (
-          <div class="col-span-12 md:col-span-6 lg:col-span-4">
-            <Link 
-              title={title}
-              description={description}
-              snippetone={snippetone}
-              link={link}
-            />
-          </div>
-        );
-      }))}
-  </div>
+<Layout title="Posts" description={pageDescription}>
+  <section class="py-8 md:py-12">
+    <div class="container mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-8 text-center">{i18n.BLOG.RECENT_ARTICLES}</h1>
+      
+      <div class="grid grid-cols-12 gap-4 md:gap-6 lg:gap-8">
+        {sortedPosts.map((post => {
+          const { title, description, snippetone, date } = post.data;
+          const { slug } = post;
+          
+          // Construir la URL según el idioma
+          let link = `/${lang}/post/${slug}`;
+          
+          return (
+            <div class="col-span-12 md:col-span-6 lg:col-span-4">
+              <Link 
+                title={title}
+                description={description}
+                snippetone={snippetone}
+                link={link}
+                date={date}
+              />
+            </div>
+          );
+        }))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Esquema JSON-LD para la colección de blogs -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "headline": pageTitle,
+    "description": pageDescription,
+    "url": canonicalURL,
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": sortedPosts.map((post, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": new URL(`/${lang}/post/${post.slug}`, Astro.site).toString(),
+        "name": post.data.title
+      }))
+    }
+  })}></script>
 </Layout>

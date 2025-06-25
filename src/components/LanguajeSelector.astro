@@ -7,6 +7,36 @@ const route = getRouteFromUrl(Astro.url);
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 
+// Determinar si estamos en una URL de post
+const isPostPage = Astro.url.pathname.includes('/post/');
+let postId = '';
+if (isPostPage) {
+  const parts = Astro.url.pathname.split('/');
+  postId = parts[parts.length - 1]; // Obtenemos el ID del post de la URL
+}
+
+// Función para generar la URL correcta según el idioma
+const getUrlForLanguage = (targetLang: string) => {
+  if (isPostPage) {
+    // Si estamos en una página de post, mantener el ID del post pero cambiar el idioma
+    // Tenemos que cambiar el nombre del archivo MD según el idioma
+    // Ejemplo: si estamos en /post/log4j_exploit_es y cambiamos a en, debería ir a /en/post/log4j_exploit_en
+    
+    // Extraer el nombre base del post (sin el sufijo de idioma)
+    let basePostId = postId;
+    if (postId.endsWith('_es') || postId.endsWith('_en')) {
+      basePostId = postId.slice(0, -3); // Remover el sufijo _xx
+    }
+    
+    // Construir el nuevo ID con el sufijo del idioma objetivo
+    const newPostId = `${basePostId}_${targetLang}`;
+    return `/${targetLang === 'es' ? '' : targetLang + '/'}post/${newPostId}`;
+  } 
+  
+  // Si no estamos en un post, usar la lógica normal de traducción
+  return translatePath(`/${route ? route : ''}`, targetLang);
+};
+
 const currentLocaleData = LANGUAGES[lang]
 const otherLocales = Object.values(LANGUAGES).filter(
   (locale) => locale.code !== lang
@@ -36,7 +66,7 @@ const {newclases = "text-xs sm:text-sm", isMobile = false} = Astro.props;
         <li class="py-[2px]">
           <a
             class="rounded-md bg-black/30 hover:bg-black/70 whitespace-no-wrap flex items-center gap-1 w-full px-2 py-2 sm:px-3"
-            href={translatePath(`/${route ? route : ''}`, locale.code)}
+            href={getUrlForLanguage(locale.code)}
             data-astro-reload
           >
             <locale.flag />

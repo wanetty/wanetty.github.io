@@ -7,6 +7,19 @@
         "TITLE": "Wanetty Blogs",
         "DESCRIPTION": "Explore offensive cybersecurity and OSCP preparation with Wanetty's blog. Deep dive into red teaming, pentesting, exploit development, and CTF walkthroughs. Real hacking techniques."
     },
+    "BLOG": {
+        "UPDATED": "Updated on",
+        "SHARE": "Share",
+        "READ_MORE": "Read more",
+        "BACK": "Back",
+        "TAGS": "Tags",
+        "RECENT_ARTICLES": "Recent Articles",
+        "SHARE_TWITTER": "Share on Twitter",
+        "SHARE_FACEBOOK": "Share on Facebook",
+        "SHARE_LINKEDIN": "Share on LinkedIn",
+        "SHARE_WHATSAPP": "Share on WhatsApp",
+        "SHARE_TELEGRAM": "Share on Telegram"
+    },
     "CONSTRUCTION": {
         "TITLE": "Construction",
         "DESCRIPTION": "This page is under construction. Please check back later."

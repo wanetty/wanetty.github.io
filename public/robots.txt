@@ -1,4 +1,21 @@
+# robots.txt para blog.wanetty.com
 User-agent: *
+Allow: /
 Disallow: /static/
+Disallow: /construction.astro
+Disallow: /en/construction.astro
 
+# Permitir acceso a recursos específicos
+Allow: /favicon.svg
+Allow: /static/avatar.jpg
+
+# Tasa de rastreo para Google
+User-agent: Googlebot
+Crawl-delay: 1
+
+# Tasa de rastreo para Bing
+User-agent: Bingbot
+Crawl-delay: 1
+
+# Sitemap
 Sitemap: https://blog.wanetty.com/sitemap-index.xml

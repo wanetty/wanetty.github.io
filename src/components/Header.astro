@@ -12,49 +12,80 @@ const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 const { visible, title, description } = Astro.props;
 
-// Header.astro
-
-
+// Generar URL absoluta
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 <head>
-    <!-- Metadatos existentes -->
-    <link rel="canonical" href={new URL(Astro.url.pathname, 'https://blog.wanetty.com').toString()} />
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Enlaces canónicos y hreflang -->
+    <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" hreflang="es" href="https://blog.wanetty.com/">
     <link rel="alternate" hreflang="en" href="https://blog.wanetty.com/en/">
     <link rel="alternate" hreflang="x-default" href="https://blog.wanetty.com/">
-    <!-- OpenGraph mejorado -->
+    
+    <!-- Metadatos OpenGraph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content={Astro.url}>
+    <meta property="og:url" content={canonicalURL}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
     <meta property="og:site_name" content={i18n.HEADER.TITLE}>
+    <meta property="og:image" content="https://blog.wanetty.com/static/avatar.jpg">
     <meta property="og:locale" content={currentLocale}>
+    <meta property="og:locale:alternate" content={currentLocale === 'es' ? 'en' : 'es'}>
     
     <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
     <meta name="twitter:image" content="https://blog.wanetty.com/static/avatar.jpg">
+    <meta name="twitter:image:alt" content={i18n.HEADER.TITLE}>
     
     <!-- Metadatos adicionales -->
     <meta name="author" content="Wanetty">
     <meta name="robots" content="index, follow">
-    <meta name="keywords" content="blog, tecnología, cyberseguridad, cybersecurity, OSCP, EvilNoVNC, RedTeam, CRTO"> 
+    <meta name="keywords" content="blog, tecnología, cyberseguridad, cybersecurity, OSCP, EvilNoVNC, RedTeam, CRTO, hacking ético, pentesting, vulnerabilidades, exploits">
+    <meta name="generator" content={Astro.generator} />
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Sitemap y favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    
+    <!-- Schema.org para Blog -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "${i18n.HEADER.TITLE}",
+        "description": "${description}",
+        "url": "${canonicalURL}",
+        "author": {
+          "@type": "Person",
+          "name": "Wanetty"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Wanetty Blog",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://blog.wanetty.com/static/avatar.jpg"
+          }
+        },
+        "inLanguage": "${currentLocale}"
+      }
+    </script>
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNGRD8TW34"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-CNGRD8TW34');
     </script>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
     
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href="http://blog.wanetty.com/" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}</title>
     <ViewTransitions />
 </head>
@@ -63,11 +94,14 @@ const { visible, title, description } = Astro.props;
     <nav class="flex items-center justify-between">
       <!-- Logo y título -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <a href={translatePath('/')}>
+        <a href={translatePath('/')} aria-label="Ir a la página principal">
           <img 
             src="/static/avatar.jpg" 
             alt="Wanetty Avatar" 
+            width="40"
+            height="40"
             class="h-8 w-8 sm:h-10 sm:w-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+            loading="eager"
           >
         </a>
         <div class="hidden sm:block">
@@ -88,6 +122,7 @@ const { visible, title, description } = Astro.props;
           <a 
             href={translatePath('/')} 
             class="rounded-lg bg-orange-400 px-3 py-2 sm:px-4 sm:py-2 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex items-center gap-2"
+            aria-label="Ir a la página de inicio"
           >
             <span class="hidden sm:inline">Home</span>
             <svg 
@@ -97,6 +132,7 @@ const { visible, title, description } = Astro.props;
               stroke-width="0.5" 
               stroke="currentColor" 
               fill="none" 
+              aria-hidden="true"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
               <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
