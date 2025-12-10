@@ -171,6 +171,6 @@ This vulnerability demonstrates that innovation in modern frameworks must be acc
 
 ## 📚 References
 
-- [React2Shell](https://github.com/assetnote/react2shell)
+- [React2Shell](https://react2shell.com)
 - [React2Shell Scanner](https://github.com/assetnote/react2shell-scanner)
 - [NextRCE](https://github.com/assetnote/next-rce)
