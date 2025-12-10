@@ -11,6 +11,7 @@ const posts = defineCollection({
     SEOTitle: z.string(),
     lang: z.string(),
     date: z.date(),
+    imageUrl: z.string().optional(),
   })
 })
 

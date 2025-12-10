@@ -1,12 +1,11 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import LanguajeSelector from './LanguajeSelector.astro';
-import { getI18N } from "@/i18n/index"
-import { getLangFromUrl, useTranslatedPath } from '@/i18n/utils';
+import { ViewTransitions } from "astro:transitions";
+import LanguajeSelector from "./LanguajeSelector.astro";
+import { getI18N } from "@/i18n/index";
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
 
-
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
@@ -14,95 +13,121 @@ const { visible, title, description } = Astro.props;
 
 // Generar URL absoluta
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 ---
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Enlaces canónicos y hreflang -->
-    <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" hreflang="es" href="https://blog.wanetty.com/">
-    <link rel="alternate" hreflang="en" href="https://blog.wanetty.com/en/">
-    <link rel="alternate" hreflang="x-default" href="https://blog.wanetty.com/">
-    
-    <!-- Metadatos OpenGraph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content={canonicalURL}>
-    <meta property="og:title" content={title}>
-    <meta property="og:description" content={description}>
-    <meta property="og:site_name" content={i18n.HEADER.TITLE}>
-    <meta property="og:image" content="https://blog.wanetty.com/static/avatar.jpg">
-    <meta property="og:locale" content={currentLocale}>
-    <meta property="og:locale:alternate" content={currentLocale === 'es' ? 'en' : 'es'}>
-    
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content={title}>
-    <meta name="twitter:description" content={description}>
-    <meta name="twitter:image" content="https://blog.wanetty.com/static/avatar.jpg">
-    <meta name="twitter:image:alt" content={i18n.HEADER.TITLE}>
-    
-    <!-- Metadatos adicionales -->
-    <meta name="author" content="Wanetty">
-    <meta name="robots" content="index, follow">
-    <meta name="keywords" content="blog, tecnología, cyberseguridad, cybersecurity, OSCP, EvilNoVNC, RedTeam, CRTO, hacking ético, pentesting, vulnerabilidades, exploits">
-    <meta name="generator" content={Astro.generator} />
+  <meta charset="UTF-8" />
+  <meta name="description" content={description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Sitemap y favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    
-    <!-- Schema.org para Blog -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Blog",
-        "name": "${i18n.HEADER.TITLE}",
-        "description": "${description}",
-        "url": "${canonicalURL}",
-        "author": {
-          "@type": "Person",
-          "name": "Wanetty"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Wanetty Blog",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://blog.wanetty.com/static/avatar.jpg"
-          }
-        },
-        "inLanguage": "${currentLocale}"
-      }
-    </script>
+  <!-- Enlaces canónicos y hreflang -->
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="alternate" hreflang="es" href="https://blog.wanetty.com/" />
+  <link rel="alternate" hreflang="en" href="https://blog.wanetty.com/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.wanetty.com/" />
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNGRD8TW34"></script>
-    <script>
+  <!-- Metadatos OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content={i18n.HEADER.TITLE} />
+  <meta
+    property="og:image"
+    content="https://blog.wanetty.com/static/avatar.jpg"
+  />
+  <meta property="og:locale" content={currentLocale} />
+  <meta
+    property="og:locale:alternate"
+    content={currentLocale === "es" ? "en" : "es"}
+  />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta
+    name="twitter:image"
+    content="https://blog.wanetty.com/static/avatar.jpg"
+  />
+  <meta name="twitter:image:alt" content={i18n.HEADER.TITLE} />
+
+  <!-- Metadatos adicionales -->
+  <meta name="author" content="Wanetty" />
+  <meta name="robots" content="index, follow" />
+  <meta
+    name="keywords"
+    content="blog, tecnología, cyberseguridad, cybersecurity, OSCP, EvilNoVNC, RedTeam, CRTO, hacking ético, pentesting, vulnerabilidades, exploits"
+  />
+  <meta name="generator" content={Astro.generator} />
+
+  <!-- Sitemap y favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <!-- Schema.org para Blog -->
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "${i18n.HEADER.TITLE}",
+      "description": "${description}",
+      "url": "${canonicalURL}",
+      "author": {
+        "@type": "Person",
+        "name": "Wanetty"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Wanetty Blog",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://blog.wanetty.com/static/avatar.jpg"
+        }
+      },
+      "inLanguage": "${currentLocale}"
+    }
+  </script>
+
+  <!-- Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-CNGRD8TW34"
+    is:inline></script>
+  <script is:inline>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-CNGRD8TW34');
-    </script>
-    
-    <title>{title}</title>
-    <ViewTransitions />
+    function gtag(...args) {
+      window.dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-CNGRD8TW34");
+  </script>
+
+  <title>{title}</title>
+  <ViewTransitions />
 </head>
-<header class="sticky top-0 z-50 w-full border-b border-orange-300 bg-slate-600 backdrop-blur supports-[backdrop-filter]:bg-slate-600/60 dark">
+<header
+  class="sticky top-0 z-50 w-full border-b border-orange-300 bg-slate-600 backdrop-blur supports-[backdrop-filter]:bg-slate-600/60 dark"
+>
   <div class="container mx-auto px-4 py-3 sm:py-4">
     <nav class="flex items-center justify-between">
       <!-- Logo y título -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <a href={translatePath('/')} aria-label="Ir a la página principal">
-          <img 
-            src="/static/avatar.jpg" 
-            alt="Wanetty Avatar" 
+        <a href={translatePath("/")} aria-label="Ir a la página principal">
+          <img
+            src="/static/avatar.jpg"
+            alt="Wanetty Avatar"
             width="40"
             height="40"
             class="h-8 w-8 sm:h-10 sm:w-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
             loading="eager"
-          >
+          />
         </a>
         <div class="hidden sm:block">
           <h1 class="text-xl font-bold text-white">{i18n.HEADER.TITLE}</h1>
@@ -117,30 +142,32 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
       <!-- Navegación -->
       <div class="flex items-center gap-2 sm:gap-4">
         <LanguajeSelector newclases="text-xs sm:text-sm" />
-        
-        {visible && (
-          <a 
-            href={translatePath('/')} 
-            class="rounded-lg bg-orange-400 px-3 py-2 sm:px-4 sm:py-2 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex items-center gap-2"
-            aria-label="Ir a la página de inicio"
-          >
-            <span class="hidden sm:inline">Home</span>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              class="w-5 h-5" 
-              viewBox="0 0 24 24" 
-              stroke-width="0.5" 
-              stroke="currentColor" 
-              fill="none" 
-              aria-hidden="true"
+
+        {
+          visible && (
+            <a
+              href={translatePath("/")}
+              class="rounded-lg bg-orange-400 px-3 py-2 sm:px-4 sm:py-2 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex items-center gap-2"
+              aria-label="Ir a la página de inicio"
             >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-              <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-              <path d="M10 12h4v4h-4z" />
-            </svg>
-          </a>
-        )}
+              <span class="hidden sm:inline">Home</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                <path d="M10 12h4v4h-4z" />
+              </svg>
+            </a>
+          )
+        }
       </div>
     </nav>
   </div>
@@ -148,32 +175,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
 <script>
   function handleScroll() {
-    const navButtons = document.getElementById('nav-buttons');
+    const navButtons = document.getElementById("nav-buttons");
     if (navButtons) {
       if (window.scrollY > 100) {
-        navButtons.classList.add('sm:opacity-0', 'sm:invisible');
+        navButtons.classList.add("sm:opacity-0", "sm:invisible");
       } else {
-        navButtons.classList.remove('sm:opacity-0', 'sm:invisible');
+        navButtons.classList.remove("sm:opacity-0", "sm:invisible");
       }
     }
   }
 
-  document.addEventListener('astro:page-load', () => {
-    window.addEventListener('scroll', handleScroll);
-    
+  document.addEventListener("astro:page-load", () => {
+    window.addEventListener("scroll", handleScroll);
+
     // Set up button click handlers
-    const homeButton = document.querySelector('button:first-of-type');
-    const cvButton = document.querySelector('button:last-of-type');
-    
+    const homeButton = document.querySelector("button:first-of-type");
+    const cvButton = document.querySelector("button:last-of-type");
+
     if (homeButton) {
-      homeButton.addEventListener('click', () => {
-        window.location.href = '/';
+      homeButton.addEventListener("click", () => {
+        window.location.href = "/";
       });
     }
-    
   });
 
-  document.addEventListener('astro:before-swap', () => {
-    window.removeEventListener('scroll', handleScroll);
+  document.addEventListener("astro:before-swap", () => {
+    window.removeEventListener("scroll", handleScroll);
   });
 </script>
