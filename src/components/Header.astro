@@ -26,6 +26,14 @@ declare global {
   <meta name="description" content={description} />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+
   <!-- Enlaces canónicos y hreflang -->
   <link rel="canonical" href={canonicalURL} />
   <link rel="alternate" hreflang="es" href="https://blog.wanetty.com/" />
@@ -171,6 +179,18 @@ declare global {
       </div>
     </nav>
   </div>
+
+  <!-- Barra de progreso de lectura -->
+  <div
+    id="progress-container"
+    class="absolute bottom-0 left-0 w-full h-1 bg-transparent hidden"
+  >
+    <div
+      id="reading-progress"
+      class="h-full bg-primary origin-left scale-x-0 transition-transform duration-100 ease-out"
+    >
+    </div>
+  </div>
 </header>
 
 <script>
@@ -196,6 +216,48 @@ declare global {
       homeButton.addEventListener("click", () => {
         window.location.href = "/";
       });
+    }
+
+    // Logic for Reading Progress Bar
+    const progressBar = document.getElementById("reading-progress");
+    const progressContainer = document.getElementById("progress-container");
+
+    // Only activate if we are on a post page (detected by existence of article)
+    // Or if explicitly passed as prop (though here we handle it via DOM check for simplicity or I can pass a prop to script)
+    // Better: Logic based on whether there is a main article content.
+    // Usually posts are inside <article>
+    const article = document.querySelector("article");
+
+    if (progressBar && progressContainer && article) {
+      progressContainer.classList.remove("hidden");
+
+      const updateProgress = () => {
+        const scrollTop = window.scrollY;
+
+        // Calculate total scrollable height of the article
+        // This is a rough estimation: doc height - viewport height
+        // But specifically for the article, we might want to track article progress
+        // For simplicity, let's track page progress as normal
+        const docHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrolled = scrollTop / docHeight;
+
+        progressBar.style.transform = `scaleX(${Math.min(Math.max(scrolled, 0), 1)})`;
+      };
+
+      window.addEventListener("scroll", updateProgress);
+      // Run once
+      updateProgress();
+
+      // Cleanup for this specific listener on swap
+      document.addEventListener(
+        "astro:before-swap",
+        () => {
+          window.removeEventListener("scroll", updateProgress);
+        },
+        { once: true },
+      );
     }
   });
 

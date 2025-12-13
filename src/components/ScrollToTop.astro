@@ -1,0 +1,59 @@
+---
+// src/components/ScrollToTop.astro
+---
+
+<button
+    id="scroll-to-top"
+    aria-label="Volver arriba"
+    class="fixed bottom-8 right-8 z-40 p-3 bg-primary text-white rounded-full shadow-lg opacity-0 invisible translate-y-10 transition-all duration-300 hover:bg-primary-600 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-surface-dark"
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+</button>
+
+<script>
+    const scrollBtn = document.getElementById("scroll-to-top");
+
+    function toggleScrollBtn() {
+        if (window.scrollY > 300) {
+            scrollBtn?.classList.remove(
+                "opacity-0",
+                "invisible",
+                "translate-y-10",
+            );
+        } else {
+            scrollBtn?.classList.add(
+                "opacity-0",
+                "invisible",
+                "translate-y-10",
+            );
+        }
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    scrollBtn?.addEventListener("click", scrollToTop);
+    window.addEventListener("scroll", toggleScrollBtn);
+
+    // Limpieza para ViewTransitions
+    document.addEventListener("astro:before-swap", () => {
+        window.removeEventListener("scroll", toggleScrollBtn);
+        scrollBtn?.removeEventListener("click", scrollToTop);
+    });
+</script>

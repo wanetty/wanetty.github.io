@@ -3,23 +3,28 @@ import Layout from "@/layouts/Layout.astro";
 import Link from "@/components/Link.astro";
 import { getCollection } from "astro:content";
 
-import { getI18N } from "@/i18n/index"
-import { getLangFromUrl, useTranslations, useTranslatedPath, } from '@/i18n/utils';
+import { getI18N } from "@/i18n/index";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@/i18n/utils";
 
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
 // Obtener y ordenar las publicaciones por fecha
-const posts = await getCollection('posts', ({ data }) => {
+const posts = await getCollection("posts", ({ data }) => {
   return data.lang === lang;
 });
 
-const sortedPosts = posts
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const sortedPosts = posts.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
 
 // Generar URL canónica
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -32,47 +37,166 @@ const pageDescription = i18n.SEO.DESCRIPTION;
 <Layout title="Posts" description={pageDescription}>
   <section class="py-8 md:py-12">
     <div class="container mx-auto px-4">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-8 text-center">{i18n.BLOG.RECENT_ARTICLES}</h1>
-      
-      <div class="grid grid-cols-12 gap-4 md:gap-6 lg:gap-8">
-        {sortedPosts.map((post => {
-          const { title, description, snippetone, date } = post.data;
-          const { slug } = post;
-          
-          // Construir la URL según el idioma
-          let link = `/${lang}/post/${slug}`;
-          
-          return (
-            <div class="col-span-12 md:col-span-6 lg:col-span-4">
-              <Link 
-                title={title}
-                description={description}
-                snippetone={snippetone}
-                link={link}
-                date={date}
-              />
+      <h1
+        class="text-3xl md:text-5xl font-bold text-white mb-8 text-center font-heading"
+      >
+        {i18n.BLOG.RECENT_ARTICLES}
+      </h1>
+
+      <!-- Search Bar (Hick's Law - Filter options) -->
+      <div class="max-w-xl mx-auto mb-12">
+        <div class="relative">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search articles..."
+            class="w-full bg-slate-800 border border-slate-700 text-white rounded-full py-3 px-6 pl-12 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-lg"
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-gray-400 absolute left-4 top-3.5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div id="posts-container" class="space-y-12">
+        {
+          sortedPosts.length > 0 && (
+            // Hero Section (First Post) (Von Restorff Effect)
+            <div
+              class="post-item col-span-12 mb-16"
+              data-title={sortedPosts[0].data.title.toLowerCase()}
+            >
+              <a
+                href={`/${lang}/post/${sortedPosts[0].slug}`}
+                class="block group"
+              >
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-slate-800 border border-slate-700">
+                  <div class="p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center">
+                    <div class="flex-1 space-y-4">
+                      <span class="inline-block px-3 py-1 text-sm font-semibold text-primary bg-primary-100/10 rounded-full mb-2">
+                        &lt;{sortedPosts[0].data.snippetone}/&gt;
+                      </span>
+                      <h2 class="text-3xl md:text-4xl font-bold text-white group-hover:text-primary transition-colors font-heading">
+                        {sortedPosts[0].data.title}
+                      </h2>
+                      <p class="text-gray-300 text-lg line-clamp-3 md:line-clamp-none">
+                        {sortedPosts[0].data.description}
+                      </p>
+                      <div class="flex items-center text-sm text-gray-400 mt-4">
+                        <time datetime={sortedPosts[0].data.date.toISOString()}>
+                          {new Date(
+                            sortedPosts[0].data.date,
+                          ).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </time>
+                        <span class="mx-2">•</span>
+                        <span class="text-primary font-medium">
+                          {i18n.BLOG.READ_MORE} &rarr;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
-          );
-        }))}
+          )
+        }
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          id="posts-grid"
+        >
+          {
+            sortedPosts.slice(1).map((post) => {
+              const { title, description, snippetone, date } = post.data;
+              const { slug } = post;
+
+              // Construir la URL según el idioma
+              let link = `/${lang}/post/${slug}`;
+
+              return (
+                <div
+                  class="post-item col-span-1"
+                  data-title={title.toLowerCase()}
+                >
+                  <Link
+                    title={title}
+                    description={description}
+                    snippetone={snippetone}
+                    link={link}
+                    date={date}
+                  />
+                </div>
+              );
+            })
+          }
+        </div>
+
+        <div id="no-results" class="hidden text-center py-20">
+          <p class="text-xl text-gray-400">No articles found</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <script>
+    const searchInput = document.getElementById("search-input");
+    const posts = document.querySelectorAll(".post-item");
+    const noResults = document.getElementById("no-results");
+
+    searchInput?.addEventListener("input", (e) => {
+      const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+      let hasResults = false;
+
+      posts.forEach((post) => {
+        const title = (post as HTMLElement).dataset.title || "";
+        if (title.includes(searchTerm)) {
+          post.classList.remove("hidden");
+          hasResults = true;
+        } else {
+          post.classList.add("hidden");
+        }
+      });
+
+      if (noResults) {
+        if (!hasResults) {
+          noResults.classList.remove("hidden");
+        } else {
+          noResults.classList.add("hidden");
+        }
+      }
+    });
+  </script>
+
   <!-- Esquema JSON-LD para la colección de blogs -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "headline": pageTitle,
-    "description": pageDescription,
-    "url": canonicalURL,
-    "mainEntity": {
-      "@type": "ItemList",
-      "itemListElement": sortedPosts.map((post, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "url": new URL(`/${lang}/post/${post.slug}`, Astro.site).toString(),
-        "name": post.data.title
-      }))
-    }
-  })}></script>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      headline: pageTitle,
+      description: pageDescription,
+      url: canonicalURL,
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: sortedPosts.map((post, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: new URL(`/${lang}/post/${post.slug}`, Astro.site).toString(),
+          name: post.data.title,
+        })),
+      },
+    })}
+  />
 </Layout>

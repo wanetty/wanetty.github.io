@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import { getLangFromUrl } from "@/i18n/utils";
+import Link from "./Link.astro";
+
+interface Props {
+    currentSlug: string;
+    tags?: string[];
+}
+
+const { currentSlug, tags = [] } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+// Fetch all posts
+const allPosts = await getCollection("posts", ({ data }) => {
+    return data.lang === lang;
+});
+
+// Filter out current post
+const otherPosts = allPosts.filter((post) => post.slug !== currentSlug);
+
+// Simple recommendation logic:
+// 1. Score posts by matching tags
+// 2. Sort by score (desc), then date (desc)
+// 3. Take top 3
+
+const scoredPosts = otherPosts.map((post) => {
+    let score = 0;
+    if (post.data.tags && tags) {
+        const matchingTags = post.data.tags.filter((tag: string) =>
+            tags.includes(tag),
+        );
+        score = matchingTags.length;
+    }
+    return { post, score };
+});
+
+scoredPosts.sort((a, b) => {
+    if (b.score !== a.score) {
+        return b.score - a.score; // Higher score first
+    }
+    return b.post.data.date.getTime() - a.post.data.date.getTime(); // Newer first
+});
+
+const relatedPosts = scoredPosts.slice(0, 3).map((item) => item.post);
+---
+
+{
+    relatedPosts.length > 0 && (
+        <div class="mt-16 border-t border-gray-700 pt-10">
+            <h3 class="text-2xl font-bold text-white mb-6 font-heading">
+                {lang === "es"
+                    ? "También te podría interesar"
+                    : "You might also like"}
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedPosts.map((post) => {
+                    const { title, description, snippetone, date } = post.data;
+                    const link =
+                        lang !== "es"
+                            ? `/${lang}/post/${post.slug}`
+                            : `/post/${post.slug}`;
+
+                    return (
+                        <div class="h-full">
+                            <Link
+                                title={title}
+                                description={description}
+                                snippetone={snippetone}
+                                link={link}
+                                date={date}
+                            />
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    )
+}
