@@ -1,13 +1,10 @@
 ---
-import Header from "@/components/Header.astro";
+import SEOHead from "@/components/SEOHead.astro";
+import Navigation from "@/components/Navigation.astro";
 import Footer from "@/components/Footer.astro";
 import { fade } from "astro:transitions";
 import { getI18N } from "@/i18n/index";
-import {
-  getLangFromUrl,
-  useTranslations,
-  useTranslatedPath,
-} from "@/i18n/utils";
+import { getLangFromUrl } from "@/i18n/utils";
 import ShareButtons from "@/components/ShareButtons.astro";
 import ScrollToTop from "@/components/ScrollToTop.astro";
 import RelatedPosts from "@/components/RelatedPosts.astro";
@@ -16,7 +13,6 @@ const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
 const lang = getLangFromUrl(Astro.url);
-const translatePath = useTranslatedPath(lang);
 
 const {
   SEOTitle,
@@ -43,8 +39,7 @@ const canonicalURL = Astro.site
 
 <!doctype html>
 <html lang={lang} dir="ltr">
-  <Header
-    visible={true}
+  <SEOHead
     title={`${i18n.SEO.TITLE} ${new Date().getFullYear()} | ${SEOTitle}`}
     description={description}
   />
@@ -54,6 +49,7 @@ const canonicalURL = Astro.site
     itemscope
     itemtype="http://schema.org/BlogPosting"
   >
+    <Navigation visible={true} />
     <!-- Google Tag Manager (noscript) -->
     <noscript
       ><iframe

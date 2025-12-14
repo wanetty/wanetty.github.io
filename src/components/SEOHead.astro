@@ -1,0 +1,119 @@
+---
+import { ClientRouter } from "astro:transitions";
+import { getI18N } from "@/i18n/index";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const { title, description } = Astro.props;
+
+// Generar URL absoluta
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content={description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Enlaces canónicos y hreflang -->
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="alternate" hreflang="es" href="https://blog.wanetty.com/" />
+  <link rel="alternate" hreflang="en" href="https://blog.wanetty.com/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://blog.wanetty.com/" />
+
+  <!-- Metadatos OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content={i18n.HEADER.TITLE} />
+  <meta
+    property="og:image"
+    content="https://blog.wanetty.com/static/avatar.jpg"
+  />
+  <meta property="og:locale" content={currentLocale} />
+  <meta
+    property="og:locale:alternate"
+    content={currentLocale === "es" ? "en" : "es"}
+  />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta
+    name="twitter:image"
+    content="https://blog.wanetty.com/static/avatar.jpg"
+  />
+  <meta name="twitter:image:alt" content={i18n.HEADER.TITLE} />
+
+  <!-- Metadatos adicionales -->
+  <meta name="author" content="Wanetty" />
+  <meta name="robots" content="index, follow" />
+  <meta
+    name="keywords"
+    content="blog, tecnología, cyberseguridad, cybersecurity, OSCP, EvilNoVNC, RedTeam, CRTO, hacking ético, pentesting, vulnerabilidades, exploits"
+  />
+  <meta name="generator" content={Astro.generator} />
+
+  <!-- Sitemap y favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <!-- Schema.org para Blog -->
+  <script type="application/ld+json" is:inline set:html={`
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "${i18n.HEADER.TITLE}",
+      "description": "${description}",
+      "url": "${canonicalURL}",
+      "author": {
+        "@type": "Person",
+        "name": "Wanetty"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Wanetty Blog",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://blog.wanetty.com/static/avatar.jpg"
+        }
+      },
+      "inLanguage": "${currentLocale}"
+    }
+  `}>
+  </script>
+
+  <!-- Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-CNGRD8TW34"
+    is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-CNGRD8TW34");
+  </script>
+
+  <title>{title}</title>
+  <ClientRouter />
+</head>

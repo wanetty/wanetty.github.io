@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    tailwind(), 
+    tailwind(),
     sitemap({
       i18n: {
         defaultLocale: 'es',
@@ -24,7 +24,9 @@ export default defineConfig({
   ],
   site: 'https://blog.wanetty.com',
   output: "server",
-  adapter: cloudflare({}),
+  adapter: cloudflare({
+    imageService: 'compile',
+  }),
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"],
