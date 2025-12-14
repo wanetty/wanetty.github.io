@@ -1,0 +1,170 @@
+---
+import LanguageSelector from "./LanguageSelector.astro";
+import { getI18N } from "@/i18n/index";
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const { visible } = Astro.props;
+---
+
+<header
+    class="sticky top-0 z-50 w-full border-b border-orange-300 bg-slate-600 backdrop-blur supports-[backdrop-filter]:bg-slate-600/60 dark"
+>
+    <div class="container mx-auto px-4 py-3 sm:py-4">
+        <nav class="flex items-center justify-between">
+            <!-- Logo y título -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a
+                    href={translatePath("/")}
+                    aria-label="Ir a la página principal"
+                >
+                    <img
+                        src="/static/avatar.jpg"
+                        alt="Wanetty Avatar"
+                        width="40"
+                        height="40"
+                        class="h-8 w-8 sm:h-10 sm:w-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+                        loading="eager"
+                    />
+                </a>
+                <div class="hidden sm:block">
+                    <h1 class="text-xl font-bold text-white">
+                        {i18n.HEADER.TITLE}
+                    </h1>
+                    <p class="text-sm text-gray-200">
+                        {i18n.HEADER.DESCRIPTION}
+                    </p>
+                </div>
+                <!-- Título móvil más compacto -->
+                <div class="sm:hidden">
+                    <h1 class="text-lg font-bold text-white">
+                        {i18n.HEADER.TITLE}
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <LanguageSelector newclases="text-xs sm:text-sm" />
+
+                {
+                    visible && (
+                        <a
+                            href={translatePath("/")}
+                            class="rounded-lg bg-orange-400 px-3 py-2 sm:px-4 sm:py-2 text-sm font-medium text-white transition hover:bg-orange-300 focus:outline-none focus:ring flex items-center gap-2"
+                            aria-label="Ir a la página de inicio"
+                        >
+                            <span class="hidden sm:inline">Home</span>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5"
+                                viewBox="0 0 24 24"
+                                stroke-width="0.5"
+                                stroke="currentColor"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                />
+                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                <path d="M10 12h4v4h-4z" />
+                            </svg>
+                        </a>
+                    )
+                }
+            </div>
+        </nav>
+    </div>
+
+    <!-- Barra de progreso de lectura -->
+    <div
+        id="progress-container"
+        class="absolute bottom-0 left-0 w-full h-1 bg-transparent hidden"
+    >
+        <div
+            id="reading-progress"
+            class="h-full bg-primary origin-left scale-x-0 transition-transform duration-100 ease-out"
+        >
+        </div>
+    </div>
+</header>
+
+<script>
+    function handleScroll() {
+        const navButtons = document.getElementById("nav-buttons");
+        if (navButtons) {
+            if (window.scrollY > 100) {
+                navButtons.classList.add("sm:opacity-0", "sm:invisible");
+            } else {
+                navButtons.classList.remove("sm:opacity-0", "sm:invisible");
+            }
+        }
+    }
+
+    document.addEventListener("astro:page-load", () => {
+        window.addEventListener("scroll", handleScroll);
+
+        // Set up button click handlers
+        const homeButton = document.querySelector("button:first-of-type");
+
+        if (homeButton) {
+            homeButton.addEventListener("click", () => {
+                window.location.href = "/";
+            });
+        }
+
+        // Logic for Reading Progress Bar
+        const progressBar = document.getElementById("reading-progress");
+        const progressContainer = document.getElementById("progress-container");
+
+        // Only activate if we are on a post page (detected by existence of article)
+        // Or if explicitly passed as prop (though here we handle it via DOM check for simplicity or I can pass a prop to script)
+        // Better: Logic based on whether there is a main article content.
+        // Usually posts are inside <article>
+        const article = document.querySelector("article");
+
+        if (progressBar && progressContainer && article) {
+            progressContainer.classList.remove("hidden");
+
+            const updateProgress = () => {
+                const scrollTop = window.scrollY;
+
+                // Calculate total scrollable height of the article
+                // This is a rough estimation: doc height - viewport height
+                // But specifically for the article, we might want to track article progress
+                // For simplicity, let's track page progress as normal
+                const docHeight =
+                    document.documentElement.scrollHeight -
+                    document.documentElement.clientHeight;
+                const scrolled = scrollTop / docHeight;
+
+                progressBar.style.transform = `scaleX(${Math.min(Math.max(scrolled, 0), 1)})`;
+            };
+
+            window.addEventListener("scroll", updateProgress);
+            // Run once
+            updateProgress();
+
+            // Cleanup for this specific listener on swap
+            document.addEventListener(
+                "astro:before-swap",
+                () => {
+                    window.removeEventListener("scroll", updateProgress);
+                },
+                { once: true },
+            );
+        }
+    });
+
+    document.addEventListener("astro:before-swap", () => {
+        window.removeEventListener("scroll", handleScroll);
+    });
+</script>
