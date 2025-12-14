@@ -110,7 +110,7 @@ Sin embargo, la técnica ha evolucionado hacia un **"Weaponized Exploit"** que u
 
 ### El Exploit Avanzado
 
-He utilizado la herramienta **NextRce** que automatiza el proceso. Lo brillante de este exploit es que no necesita un Server Action ID válido (ataca endpoints inexistentes interceptados por el router) y recupera la salida del comando.
+He utilizado la herramienta **[NextRCE](https://github.com/ynsmroztas/NextRce)** que automatiza el proceso. Lo brillante de este exploit es que no necesita un Server Action ID válido (ataca endpoints inexistentes interceptados por el router) y recupera la salida del comando.
 
 El payload clave hace algo así:
 
@@ -171,4 +171,4 @@ Esta vulnerabilidad demuestra que la innovación en frameworks modernos debe ir 
 
 - [React2Shell](https://react2shell.com)
 - [React2Shell Scanner](https://github.com/assetnote/react2shell-scanner)
-- [NextRCE](https://github.com/assetnote/next-rce)
+- [NextRCE](https://github.com/ynsmroztas/NextRce)
